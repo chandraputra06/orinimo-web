@@ -1,19 +1,16 @@
-/** @type {import('tailwindcss').Config} */
+import colors from "tailwindcss/colors";
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        'poppins': ['Poppins', 'sans-serif'],
-      },
       colors: {
-        primary: '#7B1E1E',
-        neutral: '#F5F5F5',
+        slate: colors.slate,          // ✅ balikin slate-*
+        primary: { DEFAULT: "#7B1E1E" },
+        surface: "#F5F5F5",
       },
+      fontFamily: { poppins: ["Poppins", "sans-serif"] },
     },
-  },
+  },                                                      
   plugins: [],
-}
+};

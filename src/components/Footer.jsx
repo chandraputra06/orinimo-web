@@ -2,102 +2,98 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#7B1E1E] to-[#5A1414] text-white py-12 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<footer className="bg-[#7B1E1E] text-white font-poppins">
+      <div className="container-page py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
-            <h3 className="font-bold text-xl mb-4">🛍️ Orinimo Store</h3>
-            <p className="text-sm text-gray-200 leading-relaxed">
+            <h3 className="font-bold text-lg">Orinimo Store</h3>
+            <p className="text-sm mt-2 text-white/90 leading-relaxed">
               Penyedia produk digital premium yang legal, aman, dan terjangkau untuk pengguna di Indonesia.
             </p>
+            <div className="mt-4 flex items-center gap-3">
+              <a
+                href="https://instagram.com/orinimostore"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/15 transition"
+                aria-label="Instagram"
+                title="Instagram"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3z" />
+                  <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                  <path d="M17.5 6.5a1 1 0 1 0 .001 2.001A1 1 0 0 0 17.5 6.5z" />
+                </svg>
+              </a>
+
+              <a
+                href="https://wa.me/6281234567890"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/15 transition"
+                aria-label="WhatsApp"
+                title="WhatsApp"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M20.52 3.48A11.86 11.86 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.56 4.19 1.62 6.01L0 24l6.17-1.6a12 12 0 0 0 5.85 1.49h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.21-3.51-8.41zM12.03 21.9h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.66.95.98-3.57-.24-.37A9.88 9.88 0 0 1 2.12 12c0-5.46 4.45-9.9 9.91-9.9 2.65 0 5.14 1.03 7.01 2.9a9.84 9.84 0 0 1 2.9 7 9.9 9.9 0 0 1-9.92 9.9zm5.78-7.42c-.32-.16-1.89-.93-2.18-1.04-.29-.1-.5-.16-.71.16-.21.32-.82 1.04-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.59-1.9-1.78-2.22-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.55-.08-.16-.71-1.7-.97-2.33-.26-.62-.53-.53-.71-.53h-.61c-.21 0-.55.08-.85.4-.29.32-1.12 1.09-1.12 2.66 0 1.57 1.15 3.08 1.31 3.29.16.21 2.26 3.45 5.46 4.83.76.33 1.35.53 1.81.68.76.24 1.45.21 2 .13.61-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z" />
+                </svg>
+              </a>
+            </div>
           </div>
-          
+
           <div>
-            <h4 className="font-semibold text-lg mb-4">Kategori Produk</h4>
-            <ul className="text-sm space-y-2">
+            <h4 className="font-semibold">Informasi</h4>
+            <ul className="mt-3 space-y-2 text-sm text-white/90">
               <li>
-                <Link to="/produk" className="hover:text-yellow-300 transition-colors">
-                  📺 Streaming
+                <Link className="hover:text-white" to="/cara-pembelian">
+                  Cara Pembelian
                 </Link>
               </li>
               <li>
-                <Link to="/produk" className="hover:text-yellow-300 transition-colors">
-                  🎵 Music
+                <Link className="hover:text-white" to="/metode-pembayaran">
+                  Metode Pembayaran
                 </Link>
               </li>
               <li>
-                <Link to="/produk" className="hover:text-yellow-300 transition-colors">
-                  💼 Productivity
-                </Link>
-              </li>
-              <li>
-                <Link to="/produk" className="hover:text-yellow-300 transition-colors">
-                  🎨 Creative Tools
+                <Link className="hover:text-white" to="/kebijakan-privasi">
+                  Kebijakan Privasi
                 </Link>
               </li>
             </ul>
           </div>
-          
+
           <div>
-            <h4 className="font-semibold text-lg mb-4">Informasi</h4>
-            <ul className="text-sm space-y-2">
-              <li>
-                <Link to="/faq" className="hover:text-yellow-300 transition-colors">
-                  ❓ FAQ
-                </Link>
-              </li>
-              <li>
-                <Link to="/tentang-kami" className="hover:text-yellow-300 transition-colors">
-                  ℹ️ Tentang Kami
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-yellow-300 transition-colors">
-                  📞 Hubungi Kami
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="hover:text-yellow-300 transition-colors">
-                  📝 Blog
-                </Link>
-              </li>
+            <h4 className="font-semibold">Kontak</h4>
+            <ul className="mt-3 space-y-2 text-sm text-white/90">
+              <li>Email: support@orinimo.store</li>
+              <li>WA: +62 812-3456-7890</li>
+              <li>Jam: 09.00 - 21.00 WIB</li>
             </ul>
           </div>
-          
+
           <div>
-            <h4 className="font-semibold text-lg mb-4">Newsletter</h4>
-            <p className="text-sm mb-4 text-gray-200">Dapatkan promo dan update terbaru!</p>
-            <div className="flex flex-col space-y-2">
-              <input 
-                type="email" 
-                placeholder="Email Anda" 
-                className="px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            <h4 className="font-semibold">Newsletter</h4>
+            <p className="mt-3 text-sm text-white/90">
+              Dapatkan info promo & produk terbaru langsung ke email kamu.
+            </p>
+            <div className="mt-4 flex gap-2">
+              <input
+                type="email"
+                placeholder="Email kamu"
+                className="w-full rounded-lg bg-white/10 px-3 py-2 text-sm placeholder:text-white/60 focus:bg-white/15"
               />
-              <button className="bg-yellow-400 text-[#7B1E1E] px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-all hover:scale-105">
-                Daftar Sekarang
+              <button
+                type="button"
+                className="rounded-lg bg-white text-[#7B1E1E] px-4 py-2 text-sm font-bold hover:opacity-95 transition"
+              >
+                Daftar
               </button>
             </div>
           </div>
         </div>
-        
-        <div className="border-t border-white/20 pt-6 text-center">
-          <p className="text-sm text-gray-200 mb-4">
-            &copy; 2024 Orinimo Store. Semua hak dilindungi. Made with ❤️ in Indonesia
-          </p>
-          <div className="flex justify-center space-x-6">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">
-              📷 Instagram
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">
-              📘 Facebook
-            </a>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">
-              💬 WhatsApp
-            </a>
-            <a href="https://t.me/orinimostore" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors">
-              ✈️ Telegram
-            </a>
-          </div>
+
+        <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-white/80">
+          <p>&copy; {new Date().getFullYear()} Orinimo Store. Semua hak dilindungi.</p>
         </div>
       </div>
     </footer>

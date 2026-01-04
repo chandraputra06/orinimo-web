@@ -1,87 +1,136 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useMemo, useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
+
+const BRAND = "#7B1E1E";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
+  const navItems = useMemo(
+    () => [
+      { label: "Beranda", to: "/" },
+      { label: "Produk", to: "/produk" },
+      { label: "Blog", to: "/blog" },
+      { label: "Tentang Kami", to: "/tentang-kami" },
+      { label: "FAQ", to: "/faq" },
+      { label: "Hubungi Kami", to: "/contact" },
+    ],
+    []
+  );
+
+  // Tutup menu mobile kalau pindah route (lebih enak UX)
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768) setIsOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const navLinkClass = ({ isActive }) =>
+    [
+      "px-3 py-2 rounded-lg text-sm font-semibold transition",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#7B1E1E]",
+      isActive
+        ? "bg-white/15 text-white"
+        : "text-white/90 hover:bg-white/10 hover:text-white",
+    ].join(" ");
+
   return (
-    <nav className="bg-gradient-to-r from-[#7B1E1E] to-[#5A1414] text-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold tracking-tight hover:scale-105 transition-transform">
-              🛍️ Orinimo Store
+    <header className="sticky top-0 z-50">
+      <nav className="bg-[#7B1E1E] text-white shadow-sm">
+        <div className="container-page">
+          <div className="flex items-center justify-between py-3">
+            <Link
+              to="/"
+              className="font-bold text-lg tracking-wide flex items-center gap-2"
+            >
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
+                <span className="text-base">O</span>
+              </span>
+              <span>Orinimo Store</span>
             </Link>
-          </div>
-          
-          <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:text-yellow-300 transition-colors font-medium">
-              Beranda
-            </Link>
-            <Link to="/produk" className="hover:text-yellow-300 transition-colors font-medium">
-              Produk
-            </Link>
-            <Link to="/blog" className="hover:text-yellow-300 transition-colors font-medium">
-              Blog
-            </Link>
-            <Link to="/tentang-kami" className="hover:text-yellow-300 transition-colors font-medium">
-              Tentang Kami
-            </Link>
-            <Link to="/faq" className="hover:text-yellow-300 transition-colors font-medium">
-              FAQ
-            </Link>
-            <Link to="/contact" className="hover:text-yellow-300 transition-colors font-medium">
-              Kontak
-            </Link>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-3">
-            <button className="bg-white text-[#7B1E1E] px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition-all hover:scale-105">
-              🛒 Keranjang
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-2">
+              {navItems.map((item) => (
+                <NavLink key={item.to} to={item.to} className={navLinkClass}>
+                  {item.label}
+                </NavLink>
+              ))}
+
+              <Link
+                to="/login"
+                className="ml-2 rounded-lg bg-white text-[#7B1E1E] px-4 py-2 text-sm font-bold hover:opacity-95 transition shadow-sm"
+              >
+                Login / Daftar
+              </Link>
+            </div>
+
+            {/* Mobile button */}
+            <button
+              className="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-white/10 transition"
+              aria-label="Toggle menu"
+              onClick={() => setIsOpen((v) => !v)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {isOpen ? (
+                  <>
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M4 6h16" />
+                    <path d="M4 12h16" />
+                    <path d="M4 18h16" />
+                  </>
+                )}
+              </svg>
             </button>
           </div>
-          
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+
+          {/* Mobile menu */}
+          {isOpen && (
+            <div className="md:hidden pb-4">
+              <div className="flex flex-col gap-2 rounded-2xl bg-white/10 p-3 border border-white/10">
+                {navItems.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={navLinkClass}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+
+                <Link
+                  to="/login"
+                  className="rounded-lg px-3 py-2 text-sm font-semibold hover:bg-white/10 transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login / Daftar
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
-        
-        {isOpen && (
-          <div className="md:hidden pb-4 animate-fadeIn">
-            <Link to="/" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              Beranda
-            </Link>
-            <Link to="/produk" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              Produk
-            </Link>
-            <Link to="/blog" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              Blog
-            </Link>
-            <Link to="/tentang-kami" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              Tentang Kami
-            </Link>
-            <Link to="/faq" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              FAQ
-            </Link>
-            <Link to="/contact" className="block py-2 px-4 hover:bg-white/10 rounded transition-colors" onClick={() => setIsOpen(false)}>
-              Kontak
-            </Link>
-            <button className="w-full mt-2 bg-white text-[#7B1E1E] px-4 py-2 rounded-lg font-semibold">
-              🛒 Keranjang
-            </button>
-          </div>
-        )}
-      </div>
-    </nav>
+      </nav>
+
+      {/* subtle divider */}
+      <div className="h-px bg-black/5" />
+    </header>
   );
 };
 
