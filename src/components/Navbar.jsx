@@ -10,7 +10,7 @@ const Navbar = () => {
     () => [
       { label: "Beranda", to: "/" },
       { label: "Produk", to: "/produk" },
-      { label: "Blog", to: "/blog" },
+      { label: "Cara Pembelian", to: "/cara-pembelian" },
       { label: "Tentang Kami", to: "/tentang-kami" },
       { label: "FAQ", to: "/faq" },
       { label: "Hubungi Kami", to: "/contact" },
@@ -58,13 +58,6 @@ const Navbar = () => {
                   {item.label}
                 </NavLink>
               ))}
-
-              <Link
-                to="/login"
-                className="ml-2 rounded-lg bg-white text-[#7B1E1E] px-4 py-2 text-sm font-bold hover:opacity-95 transition shadow-sm"
-              >
-                Login / Daftar
-              </Link>
             </div>
 
             {/* Mobile button */}
@@ -114,14 +107,6 @@ const Navbar = () => {
                     {item.label}
                   </NavLink>
                 ))}
-
-                <Link
-                  to="/login"
-                  className="rounded-lg px-3 py-2 text-sm font-semibold hover:bg-white/10 transition"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login / Daftar
-                </Link>
               </div>
             </div>
           )}

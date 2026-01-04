@@ -12,8 +12,8 @@ const PaymentMethods = () => {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { title: 'Transfer Bank', desc: 'BCA / BRI / Mandiri (sesuai info admin).' },
-              { title: 'E-Wallet', desc: 'DANA / OVO / GoPay (sesuai ketersediaan).' },
+              { title: 'Transfer Bank', desc: 'Seabank (sesuai info admin).' },
+              { title: 'E-Wallet', desc: 'DANA / GoPay (sesuai ketersediaan).' },
               { title: 'QRIS', desc: 'Scan QRIS untuk pembayaran cepat.' },
               { title: 'Konfirmasi', desc: 'Kirim bukti transfer via WhatsApp agar pesanan segera diproses.' },
             ].map((it) => (
