@@ -51,7 +51,7 @@ const Products = () => {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-28 -left-28 h-80 w-80 rounded-full blur-3xl"
+          className="pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl"
           style={{ backgroundColor: "rgba(123, 30, 30, 0.10)" }}
         />
 

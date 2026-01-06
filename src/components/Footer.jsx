@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-<footer className="bg-[#7B1E1E] text-white font-poppins">
+    <footer className="bg-[#7B1E1E] text-white font-poppins">
       <div className="container-page py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* 3 kolom (newsletter sudah dihapus) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Brand */}
           <div>
             <h3 className="font-bold text-lg">Orinimo Store</h3>
-            <p className="text-sm mt-2 text-white/90 leading-relaxed">
+            <p className="text-sm mt-2 text-white/90 leading-relaxed max-w-sm">
               Penyedia produk digital premium yang legal, aman, dan terjangkau untuk pengguna di Indonesia.
             </p>
+
             <div className="mt-4 flex items-center gap-3">
               <a
                 href="https://instagram.com/orinimostore"
@@ -41,6 +44,7 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Informasi */}
           <div>
             <h4 className="font-semibold">Informasi</h4>
             <ul className="mt-3 space-y-2 text-sm text-white/90">
@@ -62,6 +66,7 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Kontak */}
           <div>
             <h4 className="font-semibold">Kontak</h4>
             <ul className="mt-3 space-y-2 text-sm text-white/90">
@@ -69,26 +74,6 @@ const Footer = () => {
               <li>WA: +62 812-3456-7890</li>
               <li>Jam: 09.00 - 21.00 WIB</li>
             </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold">Newsletter</h4>
-            <p className="mt-3 text-sm text-white/90">
-              Dapatkan info promo & produk terbaru langsung ke email kamu.
-            </p>
-            <div className="mt-4 flex gap-2">
-              <input
-                type="email"
-                placeholder="Email kamu"
-                className="w-full rounded-lg bg-white/10 px-3 py-2 text-sm placeholder:text-white/60 focus:bg-white/15"
-              />
-              <button
-                type="button"
-                className="rounded-lg bg-white text-[#7B1E1E] px-4 py-2 text-sm font-bold hover:opacity-95 transition"
-              >
-                Daftar
-              </button>
-            </div>
           </div>
         </div>
 
