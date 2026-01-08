@@ -13,7 +13,7 @@ const Navbar = () => {
       { label: "Cara Pembelian", to: "/cara-pembelian" },
       { label: "Tentang Kami", to: "/tentang-kami" },
       { label: "FAQ", to: "/faq" },
-      { label: "Hubungi Kami", to: "/contact" },
+      // { label: "Hubungi Kami", to: "/contact" }, // dihapus
     ],
     []
   );
