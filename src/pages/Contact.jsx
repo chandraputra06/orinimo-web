@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
+const BRAND = "#7B1E1E";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -13,17 +15,67 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Placeholder: Kirim data ke API atau WhatsApp
-    alert('Pesan terkirim (dummy). Hubungkan ke backend/WA API jika sudah siap.');
-    setFormData({ name: '', email: '', message: '' });
+    alert("Pesan terkirim (dummy). Hubungkan ke backend/WA API jika sudah siap.");
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
     <div className="font-poppins bg-slate-50">
-      <section className="py-14">
-        <div className="container-page">
+      <style>{`
+        @keyframes floatSoft {
+          0%,100% { transform: translate3d(-2%, -2%, 0) scale(1); }
+          50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
+        }
+        @keyframes shimmerX {
+          0% { transform: translateX(-120%); }
+          100% { transform: translateX(120%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .bg-anim { animation: none !important; }
+          .shimmer { animation: none !important; }
+        }
+      `}</style>
+
+      <section className="py-14 relative overflow-hidden">
+        {/* background accent (absolute, tidak mengubah layout) */}
+        <div
+          aria-hidden
+          className="bg-anim pointer-events-none absolute -top-28 -right-28 h-80 w-80 rounded-full blur-3xl opacity-70"
+          style={{
+            backgroundColor: "rgba(123, 30, 30, 0.14)",
+            animation: "floatSoft 14s ease-in-out infinite",
+          }}
+        />
+        <div
+          aria-hidden
+          className="bg-anim pointer-events-none absolute -bottom-28 -left-28 h-80 w-80 rounded-full blur-3xl opacity-60"
+          style={{
+            backgroundColor: "rgba(123, 30, 30, 0.12)",
+            animation: "floatSoft 16s ease-in-out infinite",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.18) 1px, transparent 0)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50 via-slate-50/70 to-slate-50" />
+
+        <div className="container-page relative">
           <div className="text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Hubungi Kami</h1>
+            <p
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold border"
+              style={{ backgroundColor: "rgba(123,30,30,0.10)", color: BRAND, borderColor: "rgba(123,30,30,0.12)" }}
+            >
+              <span aria-hidden>💬</span>
+              Hubungi kami
+            </p>
+
+            <h1 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Hubungi Kami</h1>
             <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
               Ada pertanyaan soal produk, pembayaran, atau kendala akun? Kirim pesan, admin akan bantu.
             </p>
@@ -31,15 +83,16 @@ const Contact = () => {
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Info */}
-            <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+            <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
               <h2 className="text-xl font-bold text-slate-900">Kontak</h2>
-              <p className="mt-2 text-slate-600">
-                Kamu bisa hubungi kami lewat WhatsApp atau email.
-              </p>
+              <p className="mt-2 text-slate-600">Kamu bisa hubungi kami lewat WhatsApp atau email.</p>
 
               <div className="mt-6 space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">
+                <div className="group flex items-start gap-3">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center font-bold transition group-hover:shadow-md"
+                    style={{ backgroundColor: "rgba(123,30,30,0.10)", color: BRAND }}
+                  >
                     WA
                   </div>
                   <div>
@@ -48,27 +101,38 @@ const Contact = () => {
                       href="https://wa.me/6281234567890"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-600 hover:text-primary"
+                      className="text-slate-600 hover:opacity-80 transition"
+                      style={{ color: "rgba(15,23,42,0.70)" }}
                     >
                       +62 812-3456-7890
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">
+                <div className="group flex items-start gap-3">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center font-bold transition group-hover:shadow-md"
+                    style={{ backgroundColor: "rgba(123,30,30,0.10)", color: BRAND }}
+                  >
                     @
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Email</p>
-                    <a href="mailto:support@orinimo.store" className="text-slate-600 hover:text-primary">
+                    <a
+                      href="mailto:support@orinimo.store"
+                      className="text-slate-600 hover:opacity-80 transition"
+                      style={{ color: "rgba(15,23,42,0.70)" }}
+                    >
                       support@orinimo.store
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">
+                <div className="group flex items-start gap-3">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center font-bold transition group-hover:shadow-md"
+                    style={{ backgroundColor: "rgba(123,30,30,0.10)", color: BRAND }}
+                  >
                     ⏰
                   </div>
                   <div>
@@ -85,11 +149,11 @@ const Contact = () => {
                     href="https://instagram.com/orinimostore"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 transition"
+                    className="group inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 transition hover:shadow-md"
                     aria-label="Instagram"
                     title="Instagram"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-slate-700">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-slate-700 transition-transform group-hover:scale-110">
                       <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3z" />
                       <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
                       <path d="M17.5 6.5a1 1 0 1 0 .001 2.001A1 1 0 0 0 17.5 6.5z" />
@@ -100,11 +164,11 @@ const Contact = () => {
                     href="https://wa.me/6281234567890"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 transition"
+                    className="group inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 hover:bg-slate-200 transition hover:shadow-md"
                     aria-label="WhatsApp"
                     title="WhatsApp"
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-slate-700">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-slate-700 transition-transform group-hover:scale-110">
                       <path d="M20.52 3.48A11.86 11.86 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.56 4.19 1.62 6.01L0 24l6.17-1.6a12 12 0 0 0 5.85 1.49h.01c6.62 0 12-5.38 12-12 0-3.2-1.25-6.21-3.51-8.41zM12.03 21.9h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.66.95.98-3.57-.24-.37A9.88 9.88 0 0 1 2.12 12c0-5.46 4.45-9.9 9.91-9.9 2.65 0 5.14 1.03 7.01 2.9a9.84 9.84 0 0 1 2.9 7 9.9 9.9 0 0 1-9.92 9.9z" />
                     </svg>
                   </a>
@@ -113,11 +177,9 @@ const Contact = () => {
             </div>
 
             {/* Form */}
-            <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+            <div className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
               <h2 className="text-xl font-bold text-slate-900">Kirim Pesan</h2>
-              <p className="mt-2 text-slate-600">
-                Isi form di bawah ini, nanti kami balas secepatnya.
-              </p>
+              <p className="mt-2 text-slate-600">Isi form di bawah ini, nanti kami balas secepatnya.</p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 <div>
@@ -128,7 +190,8 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Nama kamu"
-                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-4"
+                    style={{ outlineColor: "rgba(123,30,30,0.35)" }}
                     required
                   />
                 </div>
@@ -141,7 +204,8 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="email@contoh.com"
-                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-4"
+                    style={{ outlineColor: "rgba(123,30,30,0.35)" }}
                     required
                   />
                 </div>
@@ -154,16 +218,26 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Tulis pesan kamu..."
                     rows={5}
-                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                    className="mt-2 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-4"
+                    style={{ outlineColor: "rgba(123,30,30,0.35)" }}
                     required
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-primary px-6 py-3 text-white font-semibold hover:opacity-95 transition"
+                  className="group relative overflow-hidden w-full rounded-lg px-6 py-3 text-white font-semibold transition hover:shadow-xl"
+                  style={{ backgroundColor: BRAND }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                 >
-                  Kirim Pesan
+                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                    <span
+                      className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                      style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                    />
+                  </span>
+                  <span className="relative">Kirim Pesan</span>
                 </button>
 
                 <p className="text-xs text-slate-500 text-center">

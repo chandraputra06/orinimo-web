@@ -41,19 +41,51 @@ const Products = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section (lebih soft biar ga nabrak navbar/footer) */}
+      <style>{`
+        @keyframes floatSoft {
+          0%,100% { transform: translate3d(-2%, -2%, 0) scale(1); }
+          50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
+        }
+        @keyframes shimmerX {
+          0% { transform: translateX(-120%); }
+          100% { transform: translateX(120%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .bg-anim { animation: none !important; }
+          .shimmer { animation: none !important; }
+        }
+      `}</style>
+
+      {/* Hero Section (soft biar ga nabrak navbar/footer) */}
       <section className="relative overflow-hidden bg-white py-16 px-4">
-        {/* blobs / tint brand */}
+        {/* blobs / tint brand (ukuran tetap, hanya ditambah animasi) */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-28 -right-28 h-80 w-80 rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(123, 30, 30, 0.12)" }}
+          className="bg-anim pointer-events-none absolute -top-28 -right-28 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            backgroundColor: "rgba(123, 30, 30, 0.12)",
+            animation: "floatSoft 14s ease-in-out infinite",
+          }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(123, 30, 30, 0.10)" }}
+          className="bg-anim pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl"
+          style={{
+            backgroundColor: "rgba(123, 30, 30, 0.10)",
+            animation: "floatSoft 16s ease-in-out infinite",
+          }}
         />
+        {/* dotted texture + soft gradient overlay */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.20) 1px, transparent 0)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/70 to-gray-50" />
 
         <div className="max-w-4xl mx-auto text-center relative">
           <p
@@ -85,7 +117,7 @@ const Products = () => {
           </p>
 
           <div data-aos="zoom-in" data-aos-delay="300" className="max-w-2xl mx-auto">
-            <div className="relative">
+            <div className="relative group">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
               <input
                 type="text"
@@ -93,8 +125,22 @@ const Products = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-5 py-4 rounded-xl bg-white text-slate-900 border border-slate-200 focus:outline-none focus:ring-4"
-                style={{ boxShadow: "0 6px 24px rgba(123,30,30,0.10)" }}
+                style={{
+                  boxShadow: "0 6px 24px rgba(123,30,30,0.10)",
+                  // ring color lebih “brand”
+                  outlineColor: "rgba(123,30,30,0.35)",
+                }}
               />
+              {/* shimmer tipis saat hover/focus (absolute, tidak mengubah layout) */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition"
+              >
+                <span
+                  className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/35 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                />
+              </span>
             </div>
           </div>
 
@@ -104,9 +150,9 @@ const Products = () => {
             data-aos-delay="400"
             className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600"
           >
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm">✅ Garansi replace</span>
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm">✅ Instant delivery</span>
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm">✅ Support responsif</span>
+            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Garansi replace</span>
+            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Instant delivery</span>
+            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Support responsif</span>
           </div>
         </div>
       </section>
@@ -115,22 +161,35 @@ const Products = () => {
       <section className="py-8 px-4 bg-white sticky top-16 z-40 shadow-md">
         <div className="max-w-7xl mx-auto">
           <div data-aos="fade-up" className="flex flex-wrap justify-center gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                data-aos="fade-up"
-                data-aos-delay={cat === "Semua" ? 0 : 80}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105 ${
-                  selectedCategory === cat
-                    ? "text-white shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-                style={selectedCategory === cat ? { backgroundColor: BRAND } : {}}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const active = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  data-aos="fade-up"
+                  data-aos-delay={cat === "Semua" ? 0 : 80}
+                  className={`group relative overflow-hidden px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105 ${
+                    active
+                      ? "text-white shadow-lg"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                  style={active ? { backgroundColor: BRAND } : {}}
+                >
+                  {/* shimmer kecil */}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition`}
+                  >
+                    <span
+                      className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      style={{ animation: "shimmerX 1.4s ease-in-out infinite" }}
+                    />
+                  </span>
+                  <span className="relative">{cat}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -151,26 +210,56 @@ const Products = () => {
                   key={product.id}
                   data-aos="fade-up"
                   data-aos-delay={Math.min(idx * 80, 240)}
-                  className="bg-white border-2 border-gray-200 rounded-xl p-6 transition-all hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl p-6 transition-all hover:scale-105 hover:shadow-xl"
                   style={{ borderColor: "rgba(0,0,0,0.08)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(123,30,30,0.45)")}
                   onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
                 >
-                  <div className="text-5xl mb-4">{product.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
-                  <p className="text-3xl font-bold mb-4" style={{ color: BRAND }}>
-                    Rp {product.price.toLocaleString()}
-                  </p>
-                  <button
-                    onClick={() => setSelectedProduct(product)}
-                    className="w-full text-white py-3 rounded-lg font-bold transition-colors"
-                    style={{ backgroundColor: BRAND }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
-                  >
-                    Lihat Detail
-                  </button>
+                  {/* hover gradient overlay */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
+                    }}
+                  />
+                  {/* glow dot */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition"
+                    style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
+                  />
+
+                  <div className="relative">
+                    <div className="text-5xl mb-4 transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-105">
+                      {product.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h3>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+                    <p className="text-3xl font-bold mb-4" style={{ color: BRAND }}>
+                      Rp {product.price.toLocaleString()}
+                    </p>
+
+                    <button
+                      onClick={() => setSelectedProduct(product)}
+                      className="group/btn relative w-full text-white py-3 rounded-lg font-bold transition-colors overflow-hidden"
+                      style={{ backgroundColor: BRAND }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
+                    >
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition"
+                      >
+                        <span
+                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                        />
+                      </span>
+                      <span className="relative">Lihat Detail</span>
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -186,49 +275,71 @@ const Products = () => {
         >
           <div
             data-aos="zoom-in"
-            className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            className="relative bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-5xl mb-4">{selectedProduct.icon}</div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{selectedProduct.name}</h2>
-            <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
-            <p className="text-4xl font-bold mb-6" style={{ color: BRAND }}>
-              Rp {selectedProduct.price.toLocaleString()}
-            </p>
+            {/* subtle modal accent */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl"
+              style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(123,30,30,0.06), rgba(255,255,255,0) 55%)",
+              }}
+            />
 
-            <div className="space-y-3 mb-6">
-              {[
-                "Legal & Aman",
-                "Garansi Replace",
-                "Instant Delivery",
-                "Support 24/7",
-              ].map((t, i) => (
-                <div
-                  key={t}
-                  data-aos="fade-up"
-                  data-aos-delay={100 + i * 80}
-                  className="flex items-center text-gray-700"
+            <div className="relative">
+              <div className="text-5xl mb-4">{selectedProduct.icon}</div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{selectedProduct.name}</h2>
+              <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
+              <p className="text-4xl font-bold mb-6" style={{ color: BRAND }}>
+                Rp {selectedProduct.price.toLocaleString()}
+              </p>
+
+              <div className="space-y-3 mb-6">
+                {["Legal & Aman", "Garansi Replace", "Instant Delivery", "Support 24/7"].map((t, i) => (
+                  <div
+                    key={t}
+                    data-aos="fade-up"
+                    data-aos-delay={100 + i * 80}
+                    className="flex items-center text-gray-700"
+                  >
+                    <span className="mr-2">✅</span> {t}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  className="group relative overflow-hidden flex-1 text-white py-3 rounded-lg font-bold transition-colors"
+                  style={{ backgroundColor: BRAND }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                 >
-                  <span className="mr-2">✅</span> {t}
-                </div>
-              ))}
-            </div>
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                  >
+                    <span
+                      className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                      style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                    />
+                  </span>
+                  <span className="relative">Beli Sekarang</span>
+                </button>
 
-            <div className="flex gap-3">
-              <button
-                className="flex-1 text-white py-3 rounded-lg font-bold transition-colors"
-                style={{ backgroundColor: BRAND }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
-              >
-                Beli Sekarang
-              </button>
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
-              >
-                Tutup
-              </button>
+                <button
+                  onClick={() => setSelectedProduct(null)}
+                  className="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+                >
+                  Tutup
+                </button>
+              </div>
             </div>
           </div>
         </div>

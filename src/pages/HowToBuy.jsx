@@ -74,9 +74,45 @@ const HowToBuy = () => {
 
   return (
     <div className="bg-white font-poppins">
+      <style>{`
+        @keyframes floatSoft {
+          0%,100% { transform: translate3d(-2%, -2%, 0) scale(1); }
+          50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
+        }
+        @keyframes shimmerX {
+          0% { transform: translateX(-120%); }
+          100% { transform: translateX(120%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .bg-anim { animation: none !important; }
+          .shimmer { animation: none !important; }
+        }
+      `}</style>
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-white">
-        <div className="container-page py-14 md:py-16 text-center">
+        <div
+          aria-hidden
+          className="bg-anim pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl opacity-60"
+          style={{ background: "rgba(123,30,30,0.18)", animation: "floatSoft 14s ease-in-out infinite" }}
+        />
+        <div
+          aria-hidden
+          className="bg-anim pointer-events-none absolute -bottom-28 -right-28 h-80 w-80 rounded-full blur-3xl opacity-50"
+          style={{ background: "rgba(123,30,30,0.14)", animation: "floatSoft 16s ease-in-out infinite" }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.18) 1px, transparent 0)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/70 to-white" />
+
+        <div className="container-page py-14 md:py-16 text-center relative">
           <p
             data-aos="fade-up"
             className="inline-flex items-center gap-2 rounded-full bg-[#7B1E1E]/10 px-4 py-2 text-sm font-semibold text-[#7B1E1E]"
@@ -109,18 +145,26 @@ const HowToBuy = () => {
           >
             <Link
               to="/produk"
-              className="inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-6 py-3 text-white font-semibold hover:opacity-95 transition shadow-sm"
+              className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-6 py-3 text-white font-semibold hover:opacity-95 transition shadow-sm"
             >
-              Lihat Produk
+              <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+              </span>
+              <span className="relative">Lihat Produk</span>
             </Link>
 
             <a
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border border-[#7B1E1E] px-6 py-3 text-[#7B1E1E] font-semibold hover:bg-[#7B1E1E] hover:text-white transition"
+              className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg border border-[#7B1E1E] px-6 py-3 text-[#7B1E1E] font-semibold hover:bg-[#7B1E1E] hover:text-white transition"
             >
-              Order via WhatsApp
+              <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/22 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+              </span>
+              <span className="relative">Order via WhatsApp</span>
             </a>
           </div>
 
@@ -134,7 +178,7 @@ const HowToBuy = () => {
                 key={b.t}
                 data-aos="fade-up"
                 data-aos-delay={b.d}
-                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm"
+                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition"
               >
                 {b.t}
               </span>
@@ -166,7 +210,7 @@ const HowToBuy = () => {
                       data-aos="fade-up"
                       data-aos-delay={Math.min(idx * 80, 240)}
                       className={[
-                        "w-full text-left rounded-2xl border p-4 transition",
+                        "group w-full text-left rounded-2xl border p-4 transition hover:shadow-sm",
                         isActive
                           ? "border-[#7B1E1E]/30 bg-[#7B1E1E]/5 shadow-sm"
                           : "border-slate-200 bg-white hover:bg-slate-50",
@@ -175,7 +219,7 @@ const HowToBuy = () => {
                       <div className="flex items-start gap-3">
                         <div
                           className={[
-                            "h-10 w-10 rounded-xl flex items-center justify-center text-lg",
+                            "h-10 w-10 rounded-xl flex items-center justify-center text-lg transition-transform group-hover:scale-105",
                             isActive ? "bg-[#7B1E1E] text-white" : "bg-slate-100 text-slate-700",
                           ].join(" ")}
                         >
@@ -203,62 +247,78 @@ const HowToBuy = () => {
             <div className="lg:col-span-7">
               <div
                 data-aos="fade-left"
-                className="rounded-3xl border border-slate-200 bg-slate-50 p-6 md:p-8 shadow-sm"
+                className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 md:p-8 shadow-sm"
               >
-                <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-2xl bg-[#7B1E1E] text-white flex items-center justify-center text-xl">
-                    {active?.icon}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl"
+                  style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
+                />
+
+                <div className="relative">
+                  <div className="flex items-start gap-4">
+                    <div className="h-12 w-12 rounded-2xl bg-[#7B1E1E] text-white flex items-center justify-center text-xl">
+                      {active?.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-900">
+                        {activeStep}. {active?.title}
+                      </h3>
+                      <p className="mt-2 text-slate-600 leading-relaxed">{active?.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900">
-                      {activeStep}. {active?.title}
-                    </h3>
-                    <p className="mt-2 text-slate-600 leading-relaxed">{active?.desc}</p>
+
+                  <div className="mt-6">
+                    <h4 data-aos="fade-up" data-aos-delay="100" className="font-bold text-slate-900">
+                      Tips biar cepat diproses
+                    </h4>
+                    <ul className="mt-3 space-y-2 text-slate-700">
+                      {active?.tips?.map((t, idx) => (
+                        <li
+                          key={idx}
+                          data-aos="fade-up"
+                          data-aos-delay={150 + idx * 80}
+                          className="flex gap-2"
+                        >
+                          <span className="mt-0.5">✅</span>
+                          <span>{t}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
 
-                <div className="mt-6">
-                  <h4 data-aos="fade-up" data-aos-delay="100" className="font-bold text-slate-900">
-                    Tips biar cepat diproses
-                  </h4>
-                  <ul className="mt-3 space-y-2 text-slate-700">
-                    {active?.tips?.map((t, idx) => (
-                      <li
-                        key={idx}
-                        data-aos="fade-up"
-                        data-aos-delay={150 + idx * 80}
-                        className="flex gap-2"
-                      >
-                        <span className="mt-0.5">✅</span>
-                        <span>{t}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <div data-aos="zoom-in" data-aos-delay="220" className="mt-7 flex flex-col sm:flex-row gap-3">
+                    <a
+                      href={WHATSAPP}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white border border-slate-200 px-5 py-3 font-semibold text-slate-900 hover:bg-slate-100 transition"
+                    >
+                      <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                        <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/60 to-transparent"
+                          style={{ animation: "shimmerX 1.3s ease-in-out infinite" }} />
+                      </span>
+                      <span className="relative">Tanya Admin via WhatsApp</span>
+                    </a>
 
-                <div data-aos="zoom-in" data-aos-delay="220" className="mt-7 flex flex-col sm:flex-row gap-3">
-                  <a
-                    href={WHATSAPP}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-lg bg-white border border-slate-200 px-5 py-3 font-semibold text-slate-900 hover:bg-slate-100 transition"
-                  >
-                    Tanya Admin via WhatsApp
-                  </a>
-
-                  <Link
-                    to="/produk"
-                    className="inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-5 py-3 font-semibold text-white hover:opacity-95 transition"
-                  >
-                    Lihat Produk
-                  </Link>
+                    <Link
+                      to="/produk"
+                      className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-5 py-3 font-semibold text-white hover:opacity-95 transition"
+                    >
+                      <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                        <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+                      </span>
+                      <span className="relative">Lihat Produk</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
 
               {/* FAQ mini */}
               <div
                 data-aos="fade-up"
-                className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
               >
                 <h4 className="font-bold text-slate-900">Pertanyaan singkat</h4>
                 <div className="mt-4 space-y-3 text-slate-700">
@@ -293,9 +353,15 @@ const HowToBuy = () => {
         <div className="container-page">
           <div
             data-aos="fade-up"
-            className="rounded-3xl bg-[#7B1E1E] text-white p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
+            className="relative overflow-hidden rounded-3xl bg-[#7B1E1E] text-white p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
           >
-            <div className="text-center md:text-left" data-aos="fade-right" data-aos-delay="100">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-40"
+              style={{ background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0) 100%)" }}
+            />
+
+            <div className="text-center md:text-left relative" data-aos="fade-right" data-aos-delay="100">
               <h3 className="text-2xl md:text-3xl font-bold">Siap order sekarang?</h3>
               <p className="mt-2 text-white/90">
                 Chat admin dan tulis produk + paket yang kamu mau. Kami bantu sampai selesai.
@@ -308,9 +374,13 @@ const HowToBuy = () => {
               href={WHATSAPP}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-white text-[#7B1E1E] px-6 py-3 font-semibold hover:opacity-95 transition shadow-sm"
+              className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white text-[#7B1E1E] px-6 py-3 font-semibold hover:opacity-95 transition shadow-sm"
             >
-              Order via WhatsApp
+              <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/70 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+              </span>
+              <span className="relative">Order via WhatsApp</span>
             </a>
           </div>
         </div>
