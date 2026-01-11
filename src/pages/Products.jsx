@@ -4,6 +4,82 @@ import "aos/dist/aos.css";
 
 const BRAND = "#7B1E1E";
 
+// Geometric Shapes Background Component
+const GeometricShapes = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+      <style>{`
+        @keyframes rotate-shape {
+          0% { transform: rotate(0deg) translateY(0px); }
+          100% { transform: rotate(360deg) translateY(-20px); }
+        }
+        
+        @keyframes float-shape {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(-30px) translateX(20px) rotate(180deg); }
+        }
+        
+        .shape-rotate {
+          animation: rotate-shape 30s linear infinite;
+        }
+        
+        .shape-float {
+          animation: float-shape 15s ease-in-out infinite;
+        }
+      `}</style>
+      
+      {/* Triangles */}
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={`triangle-${i}`}
+          className="shape-float absolute"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            width: 0,
+            height: 0,
+            borderLeft: `${20 + Math.random() * 30}px solid transparent`,
+            borderRight: `${20 + Math.random() * 30}px solid transparent`,
+            borderBottom: `${30 + Math.random() * 40}px solid rgba(123, 30, 30, 0.15)`,
+          }}
+        />
+      ))}
+      
+      {/* Squares */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={`square-${i}`}
+          className="shape-rotate absolute border-2 border-[#7B1E1E]/20"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: `${30 + Math.random() * 50}px`,
+            height: `${30 + Math.random() * 50}px`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${20 + Math.random() * 20}s`,
+          }}
+        />
+      ))}
+      
+      {/* Circles */}
+      {[...Array(10)].map((_, i) => (
+        <div
+          key={`circle-${i}`}
+          className="shape-float absolute rounded-full border-2 border-[#7B1E1E]/15"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: `${20 + Math.random() * 40}px`,
+            height: `${20 + Math.random() * 40}px`,
+            animationDelay: `${Math.random() * 5}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,61 +116,29 @@ const Products = () => {
   }, [products, selectedCategory, searchTerm]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <style>{`
-        @keyframes floatSoft {
-          0%,100% { transform: translate3d(-2%, -2%, 0) scale(1); }
-          50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
-        }
         @keyframes shimmerX {
           0% { transform: translateX(-120%); }
           100% { transform: translateX(120%); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .bg-anim { animation: none !important; }
           .shimmer { animation: none !important; }
         }
       `}</style>
 
-      {/* Hero Section (soft biar ga nabrak navbar/footer) */}
-      <section className="relative overflow-hidden bg-white py-16 px-4">
-        {/* blobs / tint brand (ukuran tetap, hanya ditambah animasi) */}
-        <div
-          aria-hidden
-          className="bg-anim pointer-events-none absolute -top-28 -right-28 h-80 w-80 rounded-full blur-3xl"
-          style={{
-            backgroundColor: "rgba(123, 30, 30, 0.12)",
-            animation: "floatSoft 14s ease-in-out infinite",
-          }}
-        />
-        <div
-          aria-hidden
-          className="bg-anim pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl"
-          style={{
-            backgroundColor: "rgba(123, 30, 30, 0.10)",
-            animation: "floatSoft 16s ease-in-out infinite",
-          }}
-        />
-        {/* dotted texture + soft gradient overlay */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.20) 1px, transparent 0)",
-            backgroundSize: "22px 22px",
-          }}
-        />
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/70 to-gray-50" />
+      {/* Hero Section dengan Geometric Shapes Background */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/30 to-white py-14 px-4">
+        {/* Geometric Shapes Background */}
+        <GeometricShapes />
+        
+        {/* Gradient Overlay untuk smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto text-center relative">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <p
             data-aos="fade-up"
-            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold"
-            style={{
-              backgroundColor: "rgba(123, 30, 30, 0.10)",
-              color: BRAND,
-            }}
+            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold bg-[#7B1E1E]/10 text-[#7B1E1E] border border-[#7B1E1E]/10"
           >
             <span aria-hidden>✨</span>
             Hemat sampai 70% • Legal & Aman
@@ -124,14 +168,10 @@ const Products = () => {
                 placeholder="Cari produk yang Anda butuhkan..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-5 py-4 rounded-xl bg-white text-slate-900 border border-slate-200 focus:outline-none focus:ring-4"
-                style={{
-                  boxShadow: "0 6px 24px rgba(123,30,30,0.10)",
-                  // ring color lebih “brand”
-                  outlineColor: "rgba(123,30,30,0.35)",
-                }}
+                className="w-full pl-12 pr-5 py-4 rounded-xl bg-white text-slate-900 border-2 border-slate-200 focus:outline-none focus:border-[#7B1E1E]/40 focus:ring-4 focus:ring-[#7B1E1E]/10 transition-all"
+                style={{ boxShadow: "0 4px 20px rgba(123,30,30,0.08)" }}
               />
-              {/* shimmer tipis saat hover/focus (absolute, tidak mengubah layout) */}
+              {/* shimmer effect */}
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition"
@@ -144,21 +184,28 @@ const Products = () => {
             </div>
           </div>
 
-          {/* mini trust */}
+          {/* Trust badges */}
           <div
             data-aos="fade-up"
             data-aos-delay="400"
             className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600"
           >
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Garansi replace</span>
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Instant delivery</span>
-            <span className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition">✅ Support responsif</span>
+            {["✅ Garansi replace", "✅ Instant delivery", "✅ Support responsif"].map((badge, i) => (
+              <span 
+                key={badge}
+                data-aos="fade-up"
+                data-aos-delay={420 + i * 80}
+                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#7B1E1E]/20 transition-all cursor-default"
+              >
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Filter Categories */}
-      <section className="py-8 px-4 bg-white sticky top-16 z-40 shadow-md">
+      {/* Filter Categories - Padding dikurangi */}
+      <section className="py-6 px-4 bg-white sticky top-16 z-40 shadow-md">
         <div className="max-w-7xl mx-auto">
           <div data-aos="fade-up" className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => {
@@ -167,19 +214,16 @@ const Products = () => {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  data-aos="fade-up"
-                  data-aos-delay={cat === "Semua" ? 0 : 80}
-                  className={`group relative overflow-hidden px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105 ${
+                  className={`group relative overflow-hidden px-6 py-2.5 rounded-lg font-semibold transition-all hover:scale-105 ${
                     active
                       ? "text-white shadow-lg"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                   style={active ? { backgroundColor: BRAND } : {}}
                 >
-                  {/* shimmer kecil */}
                   <span
                     aria-hidden
-                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition`}
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
                   >
                     <span
                       className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -194,40 +238,37 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-16 px-4">
+      {/* Products Grid - Padding dikurangi */}
+      <section className="py-12 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-20" data-aos="fade-up">
+            <div className="text-center py-16" data-aos="fade-up">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Produk tidak ditemukan</h3>
               <p className="text-gray-600">Coba kata kunci atau kategori lain</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, idx) => (
                 <div
                   key={product.id}
                   data-aos="fade-up"
                   data-aos-delay={Math.min(idx * 80, 240)}
                   className="group relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl p-6 transition-all hover:scale-105 hover:shadow-xl"
-                  style={{ borderColor: "rgba(0,0,0,0.08)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(123,30,30,0.45)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(229,231,235,1)")}
                 >
-                  {/* hover gradient overlay */}
+                  {/* Hover effects */}
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
-                      background:
-                        "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
+                      background: "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
                     }}
                   />
-                  {/* glow dot */}
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition"
+                    className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
                   />
 
@@ -278,7 +319,6 @@ const Products = () => {
             className="relative bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* subtle modal accent */}
             <div
               aria-hidden
               className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl"
@@ -288,8 +328,7 @@ const Products = () => {
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-70"
               style={{
-                background:
-                  "linear-gradient(135deg, rgba(123,30,30,0.06), rgba(255,255,255,0) 55%)",
+                background: "linear-gradient(135deg, rgba(123,30,30,0.06), rgba(255,255,255,0) 55%)",
               }}
             />
 
