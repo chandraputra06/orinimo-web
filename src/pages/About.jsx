@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 
 const BRAND = "#7B1E1E";
 
-// Mesh Gradient Background (About)
+// Mesh Gradient Background Component
 const MeshGradient = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <style>{`
@@ -56,7 +56,7 @@ const MeshGradient = () => (
       }}
     />
 
-    {/* soft dots */}
+    {/* Dot pattern overlay */}
     <div
       aria-hidden
       className="absolute inset-0 opacity-[0.10]"
@@ -76,18 +76,20 @@ const About = () => {
       easing: "ease-out-cubic",
       once: true,
       offset: 80,
-      disableMutationObserver: true,
     });
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 font-poppins">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-white py-16 px-4 text-center">
+    <div className="min-h-screen bg-white font-poppins">
+      {/* Hero Section dengan Mesh Gradient */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/30 to-white py-14 px-4 text-center">
+        {/* Mesh Gradient Background */}
         <MeshGradient />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-gray-50" />
+        
+        {/* Gradient Overlay untuk smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto relative">
+        <div className="max-w-4xl mx-auto relative z-10">
           <p
             data-aos="fade-up"
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#7B1E1E]/10 to-[#7B1E1E]/5 px-5 py-2.5 text-sm font-semibold text-[#7B1E1E] shadow-sm border border-[#7B1E1E]/10"
@@ -107,7 +109,7 @@ const About = () => {
           <p
             data-aos="fade-up"
             data-aos-delay="200"
-            className="text-xl text-slate-600 max-w-3xl mx-auto"
+            className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto"
           >
             Misi kami memudahkan akses ke layanan digital premium untuk semua orang di Indonesia.
           </p>
@@ -118,7 +120,7 @@ const About = () => {
                 key={t}
                 data-aos="fade-up"
                 data-aos-delay={320 + i * 80}
-                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition"
+                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#7B1E1E]/20 transition-all cursor-default"
               >
                 {t}
               </span>
@@ -127,8 +129,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Story */}
-      <section className="py-16 px-4 bg-white">
+      {/* Story Section - Padding dikurangi */}
+      <section className="py-12 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 data-aos="fade-up" className="text-3xl font-bold text-gray-900 mb-6">
             Cerita Kami
@@ -137,7 +139,7 @@ const About = () => {
           <p
             data-aos="fade-up"
             data-aos-delay="100"
-            className="text-gray-700 text-lg leading-relaxed mb-6"
+            className="text-gray-700 text-lg leading-relaxed mb-5"
           >
             Orinimo Store didirikan untuk memberikan solusi produk digital premium yang legal, aman,
             dan terjangkau. Kami memahami bahwa harga langganan digital resmi seringkali terlalu mahal
@@ -149,21 +151,21 @@ const About = () => {
             data-aos-delay="200"
             className="text-gray-700 text-lg leading-relaxed"
           >
-            Dengan fokus pada transparansi, kejujuran, kemudahan, dan keamanan, kami berkomitmen untuk
+            Dengan fokus pada <span className="font-semibold text-slate-800">transparansi, kejujuran, kemudahan, dan keamanan</span>, kami berkomitmen untuk
             memastikan pengalaman terbaik bagi setiap pelanggan. Kami hanya menyediakan produk dari
             sumber resmi dan terpercaya.
           </p>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-16 px-4 bg-gray-50">
+      {/* Values Section - Padding dikurangi */}
+      <section className="py-12 px-4 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <h2 data-aos="fade-up" className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h2 data-aos="fade-up" className="text-3xl font-bold text-center text-gray-900 mb-10">
             Nilai-Nilai Kami
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: "🔒",
@@ -188,19 +190,26 @@ const About = () => {
                 key={idx}
                 data-aos="fade-up"
                 data-aos-delay={Math.min(idx * 120, 240)}
-                className="group relative overflow-hidden bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-all hover:scale-105 border border-slate-100"
+                className="group relative overflow-hidden bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-slate-100"
               >
+                {/* Gradient overlay on hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
-                <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-[#7B1E1E]/8 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {/* Decorative glow */}
+                <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-[#7B1E1E]/8 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div className="relative">
-                  <div className="text-6xl mb-4 transition-transform group-hover:scale-105">{item.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#7B1E1E] transition-colors">
+                <div className="relative z-10">
+                  <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#7B1E1E] transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-gray-600 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -208,17 +217,57 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 px-4 bg-white">
+      {/* Why Choose Us Section - Padding dikurangi */}
+      <section className="py-12 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2
+            data-aos="fade-up"
+            className="text-3xl font-bold text-center text-gray-900 mb-10"
+          >
+            Mengapa Memilih Kami?
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { icon: "💰", title: "Harga Terjangkau", desc: "Hemat hingga 70% dibanding langganan resmi tanpa mengurangi kualitas layanan" },
+              { icon: "⚡", title: "Proses Cepat", desc: "Akun langsung dikirim setelah pembayaran terverifikasi, tidak perlu menunggu lama" },
+              { icon: "🔄", title: "Garansi Penggantian", desc: "Jika terjadi masalah dengan akun, kami siap mengganti dengan yang baru" },
+              { icon: "🎁", title: "Promo Menarik", desc: "Dapatkan diskon, cashback, dan bonus untuk pembelian dalam jumlah tertentu" },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                data-aos="fade-up"
+                data-aos-delay={Math.min(idx * 100, 200)}
+                className="group bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-[#7B1E1E]/30 transition-all duration-300 hover:scale-105"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl transition-transform group-hover:scale-110 group-hover:rotate-6 duration-300">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#7B1E1E] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Padding dikurangi */}
+      <section className="py-12 px-4 bg-slate-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-4 text-slate-900">
+          <h2 data-aos="fade-up" className="text-3xl font-bold mb-3 text-slate-900">
             Punya Pertanyaan?
           </h2>
           <p data-aos="fade-up" data-aos-delay="100" className="text-lg text-slate-600 mb-8">
             Tim kami siap membantu Anda. Hubungi kami kapan saja!
           </p>
 
-          <div data-aos="zoom-in" data-aos-delay="200" className="flex justify-center">
+          <div data-aos="zoom-in" data-aos-delay="200" className="flex justify-center gap-3">
             <a
               href="https://wa.me/6281234567890"
               target="_blank"
@@ -228,6 +277,22 @@ const About = () => {
               <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/18 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <span className="relative">💬 Chat WhatsApp</span>
             </a>
+          </div>
+
+          {/* Trust badges bottom */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600"
+          >
+            {["✅ Legal & terpercaya", "✅ Support responsif", "✅ Proses cepat"].map((badge, i) => (
+              <span
+                key={badge}
+                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm"
+              >
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
       </section>
