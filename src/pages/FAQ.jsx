@@ -90,7 +90,7 @@ const faqs = [
   },
 ];
 
-const CATEGORIES = ["Semua", "Produk", "Pembelian", "Pembayaran", "Keamanan", "Garansi", "Support"];
+const CATEGORIES = ["Semua", ...Array.from(new Set(faqs.map((f) => f.category)))];
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
