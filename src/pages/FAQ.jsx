@@ -36,40 +36,57 @@ const DotMatrix = () => {
 
 const faqs = [
   {
-    category: "Produk",
-    question: "Produk apa saja yang tersedia?",
+    category: "Sharing",
+    question: "Apa itu premium aplikasi sharing?",
     answer:
-      "Kami menyediakan akun dan langganan premium seperti Netflix, Spotify, Canva, VPN, dan produk digital lainnya (tersedia sesuai stok/admin).",
-  },
-  {
-    category: "Pembelian",
-    question: "Bagaimana cara membeli?",
-    answer:
-      "Pilih produk, lakukan pemesanan sesuai arahan admin, lalu pembayaran via metode yang tersedia (transfer/e-wallet/QRIS). Setelah itu, kirim bukti pembayaran agar pesanan diproses.",
+      "Premium aplikasi sharing adalah layanan premium yang digunakan bersama dalam satu akun oleh beberapa pengguna, sehingga biayanya lebih murah dibanding akun private.",
   },
   {
     category: "Keamanan",
-    question: "Apakah produk ini legal dan aman?",
+    question: "Apakah akun sharing aman?",
     answer:
-      "Kami mengutamakan keamanan. Panduan penggunaan diberikan agar akun tetap aman, dan dukungan admin tersedia jika ada kendala.",
+      "Aman selama digunakan sesuai aturan yang diberikan penjual, seperti:\n" +
+      "1. Tidak mengganti password\n" +
+      "2. Tidak logout perangkat lain\n" +
+      "3. Tidak mengubah profil utama\n" +
+      "dll",
   },
   {
-    category: "Pembayaran",
-    question: "Metode pembayaran apa saja yang tersedia?",
+    category: "Kendala",
+    question: "Kalau tiba-tiba logout sendiri bagaimana?",
     answer:
-      "Umumnya transfer bank, e-wallet (DANA/GoPay), dan QRIS (sesuai ketersediaan). Detail selalu mengikuti informasi admin.",
+      "Silakan hubungi admin. Biasanya disebabkan oleh:\n" +
+      "1. Terlalu banyak login\n" +
+      "2. Update sistem aplikasi\n" +
+      "3. Maintenance akun",
   },
   {
     category: "Garansi",
     question: "Apakah ada garansi?",
     answer:
-      "Untuk beberapa produk tersedia garansi sesuai ketentuan. Silakan tanyakan ke admin sebelum order agar jelas masa berlaku & cakupannya.",
+      "Iya, dan setiap aplikasi memiliki durasi garansi yang berbeda-beda. Pastikan mematuhi SnK produk untuk mendapatkan garansi.",
   },
   {
-    category: "Support",
-    question: "Kalau ada masalah setelah beli gimana?",
+    category: "Pemakaian",
+    question: "Apakah cocok untuk pemakaian jangka panjang?",
     answer:
-      "Hubungi admin via WhatsApp, jelaskan kendala dan sertakan screenshot bila perlu. Kami bantu pengecekan dan solusi secepatnya.",
+      "Cocok jika mengikuti aturan dan tidak sering login–logout.",
+  },
+  {
+    category: "Order",
+    question: "Cara order bagaimana?",
+    answer:
+      "Bisa lihat pada halaman Cara Pembelian.",
+  },
+  {
+    category: "Berlangganan",
+    question: "Cara berlangganan (step by step)?",
+    answer:
+      "1. Pilih produk yang diinginkan\n" +
+      "2. Mengisi data diri\n" +
+      "3. Melakukan pembayaran\n" +
+      "4. Akun akan dikirim melalui WhatsApp\n" +
+      "5. Selesai",
   },
 ];
 
@@ -263,7 +280,7 @@ const FAQ = () => {
                       ].join(" ")}
                     >
                       <div className="overflow-hidden">
-                        <div className="px-5 pb-5 text-slate-600 leading-relaxed">
+                        <div className="px-5 pb-5 text-slate-600 leading-relaxed whitespace-pre-line">
                           {faq.answer}
                           <div className="mt-4 h-px bg-slate-100" />
                           <p className="mt-3 text-sm text-slate-500 flex items-center gap-2">
