@@ -354,8 +354,16 @@ const Products = () => {
               </div>
 
               <div className="flex gap-3">
-                <button
-                  className="group relative overflow-hidden flex-1 text-white py-3 rounded-lg font-bold transition-colors"
+                <a
+                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(
+                    `Halo Orinimo Store, saya ingin order ${selectedProduct?.name}.\n\n` +
+                      `Kategori: ${selectedProduct?.category}\n` +
+                      `Harga: Rp ${selectedProduct?.price?.toLocaleString("id-ID")}\n\n` +
+                      `Tolong diproses ya. Terima kasih 🙏`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden flex-1 text-white py-3 rounded-lg font-bold transition-colors text-center"
                   style={{ backgroundColor: BRAND }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
@@ -370,7 +378,8 @@ const Products = () => {
                     />
                   </span>
                   <span className="relative">Beli Sekarang</span>
-                </button>
+                </a>
+
 
                 <button
                   onClick={() => setSelectedProduct(null)}
