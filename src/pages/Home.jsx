@@ -221,7 +221,10 @@ const Home = () => {
       data-aos="fade-up"
       className="text-2xl md:text-3xl font-bold text-slate-900 text-center"
     >
-      Benefit Belanja di <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">Orinimo Store</span>
+      Benefit Belanja di{" "}
+      <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">
+        Orinimo Store
+      </span>
     </h2>
     <p
       data-aos="fade-up"
@@ -231,13 +234,15 @@ const Home = () => {
       Keuntungan belanja di Orinimo Store: lebih aman, lebih jelas, dan dibantu sampai beres.
     </p>
 
-    <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* ✅ 2:2 */}
+    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
       {[
         {
           title: "Customer Service Siap Membantu Sampai Berhasil",
           desc: (
             <>
-              Jika Anda mengalami kesulitan, tim kami siap membantu langkah demi langkah sampai aplikasi berhasil terpasang dan bisa digunakan dengan normal.
+              Jika Anda mengalami kesulitan, tim kami siap membantu langkah demi langkah sampai
+              aplikasi berhasil terpasang dan bisa digunakan dengan normal.
               <span className="block mt-2 font-semibold text-slate-700">
                 Admin aktif setiap hari pukul 08.00 – 23.00 WIB.
               </span>
@@ -251,7 +256,8 @@ const Home = () => {
           title: "Proses Cepat & Praktis",
           desc: (
             <>
-              Setelah pembayaran terkonfirmasi, aplikasi atau akun akan segera diproses. Tanpa ribet, tanpa menunggu lama — tinggal ikuti instruksi yang kami kirim.
+              Setelah pembayaran terkonfirmasi, aplikasi atau akun akan segera diproses. Tanpa
+              ribet, tanpa menunggu lama — tinggal ikuti instruksi yang kami kirim.
             </>
           ),
           icon: "⚡️",
@@ -262,7 +268,8 @@ const Home = () => {
           title: "Beragam Metode Pembayaran",
           desc: (
             <>
-              Kami mendukung berbagai metode pembayaran: transfer bank, e-wallet, dan metode lain yang populer sehingga Anda bisa memilih yang paling nyaman.
+              Kami mendukung berbagai metode pembayaran: transfer bank, e-wallet, dan metode lain
+              yang populer sehingga Anda bisa memilih yang paling nyaman.
             </>
           ),
           icon: "💳",
@@ -273,7 +280,9 @@ const Home = () => {
           title: "Semua Akun Bergaransi",
           desc: (
             <>
-              Setiap akun yang Anda dapatkan dilindungi garansi sesuai ketentuan toko. Jika terjadi masalah yang sesuai dengan syarat garansi, kami siap membantu sampai ada solusi atau penggantian.
+              Setiap akun yang Anda dapatkan dilindungi garansi sesuai ketentuan toko. Jika terjadi
+              masalah yang sesuai dengan syarat garansi, kami siap membantu sampai ada solusi atau
+              penggantian.
             </>
           ),
           icon: "🛡️",
@@ -306,6 +315,7 @@ const Home = () => {
     </div>
   </div>
 </section>
+
 
       {/* CTA */}
       <section className="py-14 bg-white">
