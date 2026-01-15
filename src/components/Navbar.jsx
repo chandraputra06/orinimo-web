@@ -52,9 +52,14 @@ const Navbar = () => {
               to="/"
               className="group font-bold text-lg tracking-wide flex items-center gap-2"
             >
-              <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 overflow-hidden">
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/15 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                <span className="relative text-base">O</span>
+              <span className="relative inline-flex items-center justify-center overflow-hidden rounded-full">
+                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <img
+                  src="/logo-orinimo.png"
+                  alt="Orinimo Store"
+                  className="relative h-10 w-10 md:h-11 md:w-11 object-contain drop-shadow-sm"
+                  draggable="false"
+                />
               </span>
               <span className="relative">
                 Orinimo Store
