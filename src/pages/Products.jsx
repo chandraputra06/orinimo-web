@@ -27,7 +27,7 @@ const GeometricShapes = () => {
           animation: float-shape 15s ease-in-out infinite;
         }
       `}</style>
-      
+
       {/* Triangles */}
       {[...Array(6)].map((_, i) => (
         <div
@@ -45,7 +45,7 @@ const GeometricShapes = () => {
           }}
         />
       ))}
-      
+
       {/* Squares */}
       {[...Array(8)].map((_, i) => (
         <div
@@ -61,7 +61,7 @@ const GeometricShapes = () => {
           }}
         />
       ))}
-      
+
       {/* Circles */}
       {[...Array(10)].map((_, i) => (
         <div
@@ -95,17 +95,20 @@ const Products = () => {
   }, []);
 
   const products = [
-    { id: 1, name: "Netflix Premium 1 Bulan", category: "Streaming", price: 50000, icon: "🎬", description: "Akses Netflix Premium tanpa batas selama 1 bulan dengan kualitas HD & 4K" },
-    { id: 2, name: "Spotify Premium 3 Bulan", category: "Music", price: 75000, icon: "🎵", description: "Nikmati musik tanpa iklan dengan Spotify Premium selama 3 bulan" },
-    { id: 3, name: "Canva Pro 1 Tahun", category: "Creative", price: 120000, icon: "🎨", description: "Alat desain kreatif profesional untuk semua kebutuhan" },
-    { id: 4, name: "Disney+ Premium", category: "Streaming", price: 45000, icon: "🎭", description: "Streaming Disney+ dengan konten eksklusif" },
-    { id: 5, name: "YouTube Premium", category: "Streaming", price: 35000, icon: "📺", description: "Tonton YouTube tanpa iklan dengan fitur premium" },
-    { id: 6, name: "Adobe Creative Cloud", category: "Creative", price: 200000, icon: "🖼️", description: "Akses penuh ke semua aplikasi Adobe Creative Cloud" },
-    { id: 7, name: "ChatGPT Plus", category: "Productivity", price: 150000, icon: "🤖", description: "AI assistant premium untuk produktivitas maksimal" },
-    { id: 8, name: "NordVPN Premium", category: "Security", price: 80000, icon: "🔐", description: "VPN terbaik untuk privasi dan keamanan online" },
+    { id: 1, name: "Netflix Premium", category: "Streaming", price: 50000, image: "/images/products/netflix.png", description: "Akses Netflix Premium tanpa batas dengan kualitas HD & 4K." },
+    { id: 2, name: "CapCut Private", category: "Creative", price: 35000, image: "/images/products/capcut.png", description: "Editing tanpa watermark + fitur premium (private)." },
+    { id: 3, name: "Canva Premium", category: "Creative", price: 120000, image: "/images/products/canva.png", description: "Semua template premium, font & elemen premium untuk desain." },
+    { id: 4, name: "YouTube Premium", category: "Streaming", price: 35000, image: "/images/products/youtube.png", description: "Tanpa iklan (Ad-Free) + background play." },
+    { id: 5, name: "Vidio Premium", category: "Streaming", price: 25000, image: "/images/products/vidio.png", description: "Akses Vidio Premium untuk streaming tanpa batas." },
+    { id: 6, name: "VIU Premium", category: "Streaming", price: 20000, image: "/images/products/viu.png", description: "Nonton drama & film favorit dengan VIU Premium." },
+    { id: 7, name: "Prime Video Premium", category: "Streaming", price: 40000, image: "/images/products/prime.png", description: "Film & series pilihan di Prime Video dengan akun premium." },
+    { id: 8, name: "ChatGPT Plus", category: "Productivity", price: 150000, image: "/images/products/chatgpt.png", description: "AI assistant premium untuk produktivitas maksimal." },
+    { id: 9, name: "Apple Music", category: "Music", price: 50000, image: "/images/products/applemusic.png", description: "Streaming musik premium tanpa batas dengan kualitas terbaik." },
+    { id: 10, name: "HBO Max", category: "Streaming", price: 60000, image: "/images/products/hbomax.png", description: "Akses film & series eksklusif HBO Max." },
+    { id: 11, name: "Scribd", category: "Productivity", price: 45000, image: "/images/products/scribd.png", description: "Akses buku, audiobook, dan dokumen premium." },
   ];
 
-  const categories = ["Semua", "Streaming", "Music", "Creative", "Productivity", "Security"];
+  const categories = ["Semua", "Streaming", "Music", "Creative", "Productivity"];
 
   const filteredProducts = useMemo(() => {
     return products.filter(
@@ -127,12 +130,9 @@ const Products = () => {
         }
       `}</style>
 
-      {/* Hero Section dengan Geometric Shapes Background */}
+      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/30 to-white py-14 px-4">
-        {/* Geometric Shapes Background */}
         <GeometricShapes />
-        
-        {/* Gradient Overlay untuk smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white pointer-events-none" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -171,7 +171,6 @@ const Products = () => {
                 className="w-full pl-12 pr-5 py-4 rounded-xl bg-white text-slate-900 border-2 border-slate-200 focus:outline-none focus:border-[#7B1E1E]/40 focus:ring-4 focus:ring-[#7B1E1E]/10 transition-all"
                 style={{ boxShadow: "0 4px 20px rgba(123,30,30,0.08)" }}
               />
-              {/* shimmer effect */}
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition"
@@ -184,14 +183,13 @@ const Products = () => {
             </div>
           </div>
 
-          {/* Trust badges */}
           <div
             data-aos="fade-up"
             data-aos-delay="400"
             className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600"
           >
             {["✅ Garansi replace", "✅ Instant delivery", "✅ Support responsif"].map((badge, i) => (
-              <span 
+              <span
                 key={badge}
                 data-aos="fade-up"
                 data-aos-delay={420 + i * 80}
@@ -204,7 +202,7 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Filter Categories - Padding dikurangi */}
+      {/* Filter Categories */}
       <section className="py-6 px-4 bg-white sticky top-16 z-40 shadow-md">
         <div className="max-w-7xl mx-auto">
           <div data-aos="fade-up" className="flex flex-wrap justify-center gap-3">
@@ -215,16 +213,11 @@ const Products = () => {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={`group relative overflow-hidden px-6 py-2.5 rounded-lg font-semibold transition-all hover:scale-105 ${
-                    active
-                      ? "text-white shadow-lg"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    active ? "text-white shadow-lg" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                   style={active ? { backgroundColor: BRAND } : {}}
                 >
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
-                  >
+                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
                     <span
                       className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                       style={{ animation: "shimmerX 1.4s ease-in-out infinite" }}
@@ -238,7 +231,7 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Products Grid - Padding dikurangi */}
+      {/* Products Grid */}
       <section className="py-12 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           {filteredProducts.length === 0 ? (
@@ -248,13 +241,13 @@ const Products = () => {
               <p className="text-gray-600">Coba kata kunci atau kategori lain</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {filteredProducts.map((product, idx) => (
                 <div
                   key={product.id}
                   data-aos="fade-up"
                   data-aos-delay={Math.min(idx * 80, 240)}
-                  className="group relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl p-6 transition-all hover:scale-105 hover:shadow-xl"
+                  className="group relative overflow-hidden bg-white border-2 border-gray-200 rounded-xl transition-all hover:scale-[1.03] hover:shadow-xl"
                   onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(123,30,30,0.45)")}
                   onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(229,231,235,1)")}
                 >
@@ -263,7 +256,8 @@ const Products = () => {
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{
-                      background: "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
+                      background:
+                        "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
                     }}
                   />
                   <div
@@ -273,33 +267,41 @@ const Products = () => {
                   />
 
                   <div className="relative">
-                    <div className="text-5xl mb-4 transition-transform duration-300 group-hover:-rotate-2 group-hover:scale-105">
-                      {product.icon}
+                    {/* ✅ Square image (pas 1080x1080) */}
+                    <div className="overflow-hidden rounded-t-xl bg-slate-100 aspect-square">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover object-center"
+                        loading="lazy"
+                        draggable="false"
+                      />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
-                    <p className="text-3xl font-bold mb-4" style={{ color: BRAND }}>
-                      Rp {product.price.toLocaleString()}
-                    </p>
 
-                    <button
-                      onClick={() => setSelectedProduct(product)}
-                      className="group/btn relative w-full text-white py-3 rounded-lg font-bold transition-colors overflow-hidden"
-                      style={{ backgroundColor: BRAND }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
-                    >
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition"
+                    <div className="p-5">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+
+                      <p className="text-2xl font-bold mb-4" style={{ color: BRAND }}>
+                        Rp {product.price.toLocaleString()}
+                      </p>
+
+                      <button
+                        onClick={() => setSelectedProduct(product)}
+                        className="group/btn relative w-full text-white py-3 rounded-lg font-bold transition-colors overflow-hidden"
+                        style={{ backgroundColor: BRAND }}
+                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
+                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                       >
-                        <span
-                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
-                        />
-                      </span>
-                      <span className="relative">Lihat Detail</span>
-                    </button>
+                        <span aria-hidden className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition">
+                          <span
+                            className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                            style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                          />
+                        </span>
+                        <span className="relative">Lihat Detail</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -333,7 +335,17 @@ const Products = () => {
             />
 
             <div className="relative">
-              <div className="text-5xl mb-4">{selectedProduct.icon}</div>
+              {/* ✅ Square image in modal + batas tinggi */}
+              <div className="overflow-hidden rounded-xl bg-slate-100 mb-5 aspect-square max-h-[380px]">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  draggable="false"
+                />
+              </div>
+
               <h2 className="text-3xl font-bold text-gray-900 mb-4">{selectedProduct.name}</h2>
               <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
               <p className="text-4xl font-bold mb-6" style={{ color: BRAND }}>
@@ -341,7 +353,7 @@ const Products = () => {
               </p>
 
               <div className="space-y-3 mb-6">
-                {["Legal & Aman", "Garansi Replace", "Instant Delivery", "Support 24/7"].map((t, i) => (
+                {["Legal & Aman", "Garansi Replace", "Instant Delivery", "Support responsif"].map((t, i) => (
                   <div
                     key={t}
                     data-aos="fade-up"
@@ -368,10 +380,7 @@ const Products = () => {
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                 >
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
-                  >
+                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
                     <span
                       className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
                       style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
@@ -379,7 +388,6 @@ const Products = () => {
                   </span>
                   <span className="relative">Beli Sekarang</span>
                 </a>
-
 
                 <button
                   onClick={() => setSelectedProduct(null)}
