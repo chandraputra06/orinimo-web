@@ -47,7 +47,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://wa.me/6281234567890"
+                href="https://wa.me/+6281325505028"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/15 transition hover:shadow-lg hover:shadow-black/10"

@@ -4,7 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const WHATSAPP =
-  "https://wa.me/6281234567890?text=Halo%20Orinimo%20Store,%20saya%20ingin%20order%20produk%20digital.%20Tolong%20dibantu%20ya.";
+  "https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20order%20produk%20digital.%20Tolong%20dibantu%20ya.";
 
 const HowToBuy = () => {
   const [activeStep, setActiveStep] = useState(1);

@@ -345,7 +345,7 @@ const Home = () => {
             <a
               data-aos="zoom-in"
               data-aos-delay="200"
-              href="https://wa.me/6281234567890?text=Halo%20Orinimo%20Store,%20tolong%20rekomendasikan%20paket%20yang%20cocok%20untuk%20saya."
+              href="https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20tolong%20rekomendasikan%20paket%20yang%20cocok%20untuk%20saya."
               target="_blank"
               rel="noopener noreferrer"
               className="group relative z-10 inline-flex items-center justify-center rounded-lg bg-white text-[#7B1E1E] px-6 py-3 font-semibold hover:opacity-95 transition shadow-sm hover:shadow-xl hover:shadow-black/15 overflow-hidden"

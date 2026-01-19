@@ -200,7 +200,7 @@ const PaymentMethods = () => {
                 </div>
 
                 <a
-                  href="https://wa.me/6281234567890?text=Halo%20Orinimo%20Store,%20saya%20ingin%20konfirmasi%20pembayaran."
+                  href="https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20konfirmasi%20pembayaran."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-xl bg-[#7B1E1E] px-5 py-3 text-white font-semibold hover:opacity-95 transition shadow-sm"

@@ -275,7 +275,7 @@ const About = () => {
 
           <div data-aos="zoom-in" data-aos-delay="200" className="flex justify-center gap-3">
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/+6281325505028"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] px-8 py-4 text-white font-bold hover:shadow-2xl hover:shadow-[#7B1E1E]/30 transition-all duration-300 hover:scale-105 overflow-hidden"

@@ -67,10 +67,6 @@ const PrivacyPolicy = () => {
                 title: "Pihak ketiga",
                 desc: "Kami tidak menjual data pribadi. Data dapat dibagikan seperlunya untuk operasional (mis. payment) jika diperlukan.",
               },
-              {
-                title: "Kontak",
-                desc: "Jika ada pertanyaan terkait privasi, silakan hubungi kami via halaman Hubungi Kami.",
-              },
             ].map((it) => (
               <div
                 key={it.title}

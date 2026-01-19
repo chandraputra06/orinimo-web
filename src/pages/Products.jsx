@@ -452,11 +452,11 @@ const Products = () => {
 
               <div className="flex gap-3">
                 <a
-                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(
+                  href={`https://wa.me/+6281325505028?text=${encodeURIComponent(
                     `Halo Orinimo Store, saya ingin order ${selectedProduct?.name}.\n\n` +
                       `Kategori: ${selectedProduct?.category}\n` +
                       `Harga: Rp ${selectedProduct?.price?.toLocaleString("id-ID")}\n\n` +
-                      `Tolong diproses ya. Terima kasih 🙏`
+                      `Tolong diproses ya. Terima kasih 😊`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
