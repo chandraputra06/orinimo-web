@@ -77,6 +77,9 @@ const About = () => {
       once: true,
       offset: 80,
     });
+
+    // ✅ Set judul tab untuk halaman Tentang Kami
+    document.title = "Orinimo Store - Tentang Kami";
   }, []);
 
   return (
@@ -151,9 +154,12 @@ const About = () => {
             data-aos-delay="200"
             className="text-gray-700 text-lg leading-relaxed"
           >
-            Dengan fokus pada <span className="font-semibold text-slate-800">transparansi, kejujuran, kemudahan, dan keamanan</span>, kami berkomitmen untuk
-            memastikan pengalaman terbaik bagi setiap pelanggan. Kami hanya menyediakan produk dari
-            sumber resmi dan terpercaya.
+            Dengan fokus pada{" "}
+            <span className="font-semibold text-slate-800">
+              transparansi, kejujuran, kemudahan, dan keamanan
+            </span>
+            , kami berkomitmen untuk memastikan pengalaman terbaik bagi setiap pelanggan. Kami hanya
+            menyediakan produk dari sumber resmi dan terpercaya.
           </p>
         </div>
       </section>

@@ -104,6 +104,12 @@ const FAQ = () => {
       once: true,
       offset: 80,
     });
+
+    // ✅ Set title tab khusus halaman FAQ
+    document.title = "Orinimo Store - FAQ";
+
+    // ✅ Scroll ke atas saat halaman dibuka
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const filtered = useMemo(() => {

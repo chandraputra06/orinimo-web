@@ -16,6 +16,9 @@ const HowToBuy = () => {
       once: true,
       offset: 80,
     });
+
+    // ✅ set judul tab untuk halaman Cara Pembelian
+    document.title = "Orinimo Store - Cara Pembelian";
   }, []);
 
   const steps = useMemo(
@@ -287,16 +290,25 @@ const HowToBuy = () => {
                     </ul>
                   </div>
 
-                  <div data-aos="zoom-in" data-aos-delay="220" className="mt-7 flex flex-col sm:flex-row gap-3">
+                  <div
+                    data-aos="zoom-in"
+                    data-aos-delay="220"
+                    className="mt-7 flex flex-col sm:flex-row gap-3"
+                  >
                     <a
                       href={WHATSAPP}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white border border-slate-200 px-5 py-3 font-semibold text-slate-900 hover:bg-slate-100 transition"
                     >
-                      <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-                        <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/60 to-transparent"
-                          style={{ animation: "shimmerX 1.3s ease-in-out infinite" }} />
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                      >
+                        <span
+                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/60 to-transparent"
+                          style={{ animation: "shimmerX 1.3s ease-in-out infinite" }}
+                        />
                       </span>
                       <span className="relative">Tanya Admin via WhatsApp</span>
                     </a>
@@ -305,9 +317,14 @@ const HowToBuy = () => {
                       to="/produk"
                       className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-5 py-3 font-semibold text-white hover:opacity-95 transition"
                     >
-                      <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-                        <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                      >
+                        <span
+                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                        />
                       </span>
                       <span className="relative">Lihat Produk</span>
                     </Link>
@@ -358,10 +375,17 @@ const HowToBuy = () => {
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-40"
-              style={{ background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0) 100%)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0) 100%)",
+              }}
             />
 
-            <div className="text-center md:text-left relative" data-aos="fade-right" data-aos-delay="100">
+            <div
+              className="text-center md:text-left relative"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
               <h3 className="text-2xl md:text-3xl font-bold">Siap order sekarang?</h3>
               <p className="mt-2 text-white/90">
                 Chat admin dan tulis produk + paket yang kamu mau. Kami bantu sampai selesai.
@@ -376,9 +400,14 @@ const HowToBuy = () => {
               rel="noopener noreferrer"
               className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white text-[#7B1E1E] px-6 py-3 font-semibold hover:opacity-95 transition shadow-sm"
             >
-              <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/70 to-transparent"
-                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+              <span
+                aria-hidden
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+              >
+                <span
+                  className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/70 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                />
               </span>
               <span className="relative">Order via WhatsApp</span>
             </a>

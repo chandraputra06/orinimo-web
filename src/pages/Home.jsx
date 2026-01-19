@@ -127,6 +127,9 @@ const Home = () => {
       once: true,
       offset: 80,
     });
+
+    // ✅ set title tab untuk halaman beranda
+    document.title = "Orinimo Store - Beranda";
   }, []);
 
   return (
@@ -143,9 +146,7 @@ const Home = () => {
             data-aos="fade-up"
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#7B1E1E]/12 to-[#7B1E1E]/6 px-4 py-2 text-sm font-semibold text-[#7B1E1E] shadow-sm border border-[#7B1E1E]/10"
           >
-            <span aria-hidden className="animate-pulse">
-              ✨
-            </span>
+            <span aria-hidden className="animate-pulse">✨</span>
             Akses premium, harga bersahabat
           </p>
 
@@ -207,7 +208,9 @@ const Home = () => {
                 data-aos-delay={b.delay}
                 className="group rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#7B1E1E]/25 transition cursor-default"
               >
-                <span className="inline-block transition-transform group-hover:scale-110">{b.text}</span>
+                <span className="inline-block transition-transform group-hover:scale-110">
+                  {b.text}
+                </span>
               </span>
             ))}
           </div>
@@ -216,106 +219,105 @@ const Home = () => {
 
       {/* Feature */}
       <section className="py-14 bg-white">
-  <div className="container-page">
-    <h2
-      data-aos="fade-up"
-      className="text-2xl md:text-3xl font-bold text-slate-900 text-center"
-    >
-      Benefit Belanja di{" "}
-      <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">
-        Orinimo Store
-      </span>
-    </h2>
-    <p
-      data-aos="fade-up"
-      data-aos-delay="100"
-      className="mt-3 text-center text-slate-600 max-w-2xl mx-auto"
-    >
-      Keuntungan belanja di Orinimo Store: lebih aman, lebih jelas, dan dibantu sampai beres.
-    </p>
+        <div className="container-page">
+          <h2
+            data-aos="fade-up"
+            className="text-2xl md:text-3xl font-bold text-slate-900 text-center"
+          >
+            Benefit Belanja di{" "}
+            <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">
+              Orinimo Store
+            </span>
+          </h2>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="mt-3 text-center text-slate-600 max-w-2xl mx-auto"
+          >
+            Keuntungan belanja di Orinimo Store: lebih aman, lebih jelas, dan dibantu sampai beres.
+          </p>
 
-    {/* ✅ 2:2 */}
-    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-      {[
-        {
-          title: "Customer Service Siap Membantu Sampai Berhasil",
-          desc: (
-            <>
-              Jika Anda mengalami kesulitan, tim kami siap membantu langkah demi langkah sampai
-              aplikasi berhasil terpasang dan bisa digunakan dengan normal.
-              <span className="block mt-2 font-semibold text-slate-700">
-                Admin aktif setiap hari pukul 08.00 – 23.00 WIB.
-              </span>
-            </>
-          ),
-          icon: "💬",
-          delay: 0,
-          gradient: "from-rose-400/15 to-red-400/10",
-        },
-        {
-          title: "Proses Cepat & Praktis",
-          desc: (
-            <>
-              Setelah pembayaran terkonfirmasi, aplikasi atau akun akan segera diproses. Tanpa
-              ribet, tanpa menunggu lama — tinggal ikuti instruksi yang kami kirim.
-            </>
-          ),
-          icon: "⚡️",
-          delay: 120,
-          gradient: "from-amber-400/15 to-orange-400/10",
-        },
-        {
-          title: "Beragam Metode Pembayaran",
-          desc: (
-            <>
-              Kami mendukung berbagai metode pembayaran: transfer bank, e-wallet, dan metode lain
-              yang populer sehingga Anda bisa memilih yang paling nyaman.
-            </>
-          ),
-          icon: "💳",
-          delay: 240,
-          gradient: "from-blue-400/15 to-indigo-400/10",
-        },
-        {
-          title: "Semua Akun Bergaransi",
-          desc: (
-            <>
-              Setiap akun yang Anda dapatkan dilindungi garansi sesuai ketentuan toko. Jika terjadi
-              masalah yang sesuai dengan syarat garansi, kami siap membantu sampai ada solusi atau
-              penggantian.
-            </>
-          ),
-          icon: "🛡️",
-          delay: 360,
-          gradient: "from-emerald-400/15 to-teal-400/10",
-        },
-      ].map((it) => (
-        <div
-          key={it.title}
-          data-aos="fade-up"
-          data-aos-delay={it.delay}
-          className="group relative rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-lg transition overflow-hidden"
-        >
-          <div
-            className={`absolute inset-0 bg-gradient-to-br ${it.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-          />
-          <div className="relative z-10">
-            <div className="text-3xl inline-flex items-center justify-center rounded-xl bg-white/60 px-3 py-2 shadow-sm group-hover:shadow-md transition group-hover:scale-105 group-hover:-rotate-1">
-              {it.icon}
-            </div>
-            <h3 className="mt-4 font-bold text-lg text-slate-900 group-hover:text-[#7B1E1E] transition-colors">
-              {it.title}
-            </h3>
-            <p className="mt-2 text-slate-600 leading-relaxed">{it.desc}</p>
+          {/* ✅ 2:2 */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                title: "Customer Service Siap Membantu Sampai Berhasil",
+                desc: (
+                  <>
+                    Jika Anda mengalami kesulitan, tim kami siap membantu langkah demi langkah sampai
+                    aplikasi berhasil terpasang dan bisa digunakan dengan normal.
+                    <span className="block mt-2 font-semibold text-slate-700">
+                      Admin aktif setiap hari pukul 08.00 – 23.00 WIB.
+                    </span>
+                  </>
+                ),
+                icon: "💬",
+                delay: 0,
+                gradient: "from-rose-400/15 to-red-400/10",
+              },
+              {
+                title: "Proses Cepat & Praktis",
+                desc: (
+                  <>
+                    Setelah pembayaran terkonfirmasi, aplikasi atau akun akan segera diproses. Tanpa
+                    ribet, tanpa menunggu lama — tinggal ikuti instruksi yang kami kirim.
+                  </>
+                ),
+                icon: "⚡️",
+                delay: 120,
+                gradient: "from-amber-400/15 to-orange-400/10",
+              },
+              {
+                title: "Beragam Metode Pembayaran",
+                desc: (
+                  <>
+                    Kami mendukung berbagai metode pembayaran: transfer bank, e-wallet, dan metode lain
+                    yang populer sehingga Anda bisa memilih yang paling nyaman.
+                  </>
+                ),
+                icon: "💳",
+                delay: 240,
+                gradient: "from-blue-400/15 to-indigo-400/10",
+              },
+              {
+                title: "Semua Akun Bergaransi",
+                desc: (
+                  <>
+                    Setiap akun yang Anda dapatkan dilindungi garansi sesuai ketentuan toko. Jika terjadi
+                    masalah yang sesuai dengan syarat garansi, kami siap membantu sampai ada solusi atau
+                    penggantian.
+                  </>
+                ),
+                icon: "🛡️",
+                delay: 360,
+                gradient: "from-emerald-400/15 to-teal-400/10",
+              },
+            ].map((it) => (
+              <div
+                key={it.title}
+                data-aos="fade-up"
+                data-aos-delay={it.delay}
+                className="group relative rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm hover:shadow-lg transition overflow-hidden"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${it.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                />
+                <div className="relative z-10">
+                  <div className="text-3xl inline-flex items-center justify-center rounded-xl bg-white/60 px-3 py-2 shadow-sm group-hover:shadow-md transition group-hover:scale-105 group-hover:-rotate-1">
+                    {it.icon}
+                  </div>
+                  <h3 className="mt-4 font-bold text-lg text-slate-900 group-hover:text-[#7B1E1E] transition-colors">
+                    {it.title}
+                  </h3>
+                  <p className="mt-2 text-slate-600 leading-relaxed">{it.desc}</p>
+                </div>
+
+                <div className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-[#7B1E1E]/8 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            ))}
           </div>
-
-          <div className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full bg-[#7B1E1E]/8 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
 
       {/* CTA */}
       <section className="py-14 bg-white">
@@ -329,7 +331,11 @@ const Home = () => {
             <div className="absolute bottom-[-48px] left-[-48px] w-64 h-64 rounded-full bg-white/6 blur-3xl" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/0 via-white/6 to-black/0 opacity-40" />
 
-            <div className="text-center md:text-left relative z-10" data-aos="fade-right" data-aos-delay="100">
+            <div
+              className="text-center md:text-left relative z-10"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
               <h3 className="text-2xl md:text-3xl font-bold">Butuh rekomendasi produk?</h3>
               <p className="mt-2 text-white/90">
                 Chat admin, kita bantu pilih paket yang paling cocok buat kamu.

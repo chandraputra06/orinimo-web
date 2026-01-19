@@ -92,20 +92,100 @@ const Products = () => {
       once: true,
       offset: 80,
     });
+
+    // ✅ set title untuk halaman produk
+    document.title = "Orinimo Store - Produk";
   }, []);
 
   const products = [
-    { id: 1, name: "Netflix Premium", category: "Streaming", price: 50000, image: "/images/products/netflix.png", description: "Akses Netflix Premium tanpa batas dengan kualitas HD & 4K." },
-    { id: 2, name: "CapCut Private", category: "Creative", price: 35000, image: "/images/products/capcut.png", description: "Editing tanpa watermark + fitur premium (private)." },
-    { id: 3, name: "Canva Premium", category: "Creative", price: 120000, image: "/images/products/canva.png", description: "Semua template premium, font & elemen premium untuk desain." },
-    { id: 4, name: "YouTube Premium", category: "Streaming", price: 35000, image: "/images/products/youtube.png", description: "Tanpa iklan (Ad-Free) + background play." },
-    { id: 5, name: "Vidio Premium", category: "Streaming", price: 25000, image: "/images/products/vidio.png", description: "Akses Vidio Premium untuk streaming tanpa batas." },
-    { id: 6, name: "VIU Premium", category: "Streaming", price: 20000, image: "/images/products/viu.png", description: "Nonton drama & film favorit dengan VIU Premium." },
-    { id: 7, name: "Prime Video Premium", category: "Streaming", price: 40000, image: "/images/products/prime.png", description: "Film & series pilihan di Prime Video dengan akun premium." },
-    { id: 8, name: "ChatGPT Plus", category: "Productivity", price: 150000, image: "/images/products/chatgpt.png", description: "AI assistant premium untuk produktivitas maksimal." },
-    { id: 9, name: "Apple Music", category: "Music", price: 50000, image: "/images/products/applemusic.png", description: "Streaming musik premium tanpa batas dengan kualitas terbaik." },
-    { id: 10, name: "HBO Max", category: "Streaming", price: 60000, image: "/images/products/hbomax.png", description: "Akses film & series eksklusif HBO Max." },
-    { id: 11, name: "Scribd", category: "Productivity", price: 45000, image: "/images/products/scribd.png", description: "Akses buku, audiobook, dan dokumen premium." },
+    {
+      id: 1,
+      name: "Netflix Premium",
+      category: "Streaming",
+      price: 50000,
+      image: "/images/products/netflix.png",
+      description: "Akses Netflix Premium tanpa batas dengan kualitas HD & 4K.",
+    },
+    {
+      id: 2,
+      name: "CapCut Private",
+      category: "Creative",
+      price: 35000,
+      image: "/images/products/capcut.png",
+      description: "Editing tanpa watermark + fitur premium (private).",
+    },
+    {
+      id: 3,
+      name: "Canva Premium",
+      category: "Creative",
+      price: 120000,
+      image: "/images/products/canva.png",
+      description: "Semua template premium, font & elemen premium untuk desain.",
+    },
+    {
+      id: 4,
+      name: "YouTube Premium",
+      category: "Streaming",
+      price: 35000,
+      image: "/images/products/youtube.png",
+      description: "Tanpa iklan (Ad-Free) + background play.",
+    },
+    {
+      id: 5,
+      name: "Vidio Premium",
+      category: "Streaming",
+      price: 25000,
+      image: "/images/products/vidio.png",
+      description: "Akses Vidio Premium untuk streaming tanpa batas.",
+    },
+    {
+      id: 6,
+      name: "VIU Premium",
+      category: "Streaming",
+      price: 20000,
+      image: "/images/products/viu.png",
+      description: "Nonton drama & film favorit dengan VIU Premium.",
+    },
+    {
+      id: 7,
+      name: "Prime Video Premium",
+      category: "Streaming",
+      price: 40000,
+      image: "/images/products/prime.png",
+      description: "Film & series pilihan di Prime Video dengan akun premium.",
+    },
+    {
+      id: 8,
+      name: "ChatGPT Plus",
+      category: "Productivity",
+      price: 150000,
+      image: "/images/products/chatgpt.png",
+      description: "AI assistant premium untuk produktivitas maksimal.",
+    },
+    {
+      id: 9,
+      name: "Apple Music",
+      category: "Music",
+      price: 50000,
+      image: "/images/products/applemusic.png",
+      description: "Streaming musik premium tanpa batas dengan kualitas terbaik.",
+    },
+    {
+      id: 10,
+      name: "HBO Max",
+      category: "Streaming",
+      price: 60000,
+      image: "/images/products/hbomax.png",
+      description: "Akses film & series eksklusif HBO Max.",
+    },
+    {
+      id: 11,
+      name: "Scribd",
+      category: "Productivity",
+      price: 45000,
+      image: "/images/products/scribd.png",
+      description: "Akses buku, audiobook, dan dokumen premium.",
+    },
   ];
 
   const categories = ["Semua", "Streaming", "Music", "Creative", "Productivity"];
@@ -293,7 +373,10 @@ const Products = () => {
                         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
                         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                       >
-                        <span aria-hidden className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition">
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition"
+                        >
                           <span
                             className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
                             style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
@@ -353,16 +436,18 @@ const Products = () => {
               </p>
 
               <div className="space-y-3 mb-6">
-                {["Legal & Aman", "Garansi Replace", "Instant Delivery", "Support responsif"].map((t, i) => (
-                  <div
-                    key={t}
-                    data-aos="fade-up"
-                    data-aos-delay={100 + i * 80}
-                    className="flex items-center text-gray-700"
-                  >
-                    <span className="mr-2">✅</span> {t}
-                  </div>
-                ))}
+                {["Legal & Aman", "Garansi Replace", "Instant Delivery", "Support responsif"].map(
+                  (t, i) => (
+                    <div
+                      key={t}
+                      data-aos="fade-up"
+                      data-aos-delay={100 + i * 80}
+                      className="flex items-center text-gray-700"
+                    >
+                      <span className="mr-2">✅</span> {t}
+                    </div>
+                  )
+                )}
               </div>
 
               <div className="flex gap-3">
@@ -380,7 +465,10 @@ const Products = () => {
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5A1414")}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = BRAND)}
                 >
-                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
+                  >
                     <span
                       className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
                       style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
