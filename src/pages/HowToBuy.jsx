@@ -21,6 +21,11 @@ const HowToBuy = () => {
     document.title = "Orinimo Store - Cara Pembelian";
   }, []);
 
+  // ✅ Refresh AOS setiap kali activeStep berubah
+  useEffect(() => {
+    AOS.refresh();
+  }, [activeStep]);
+
   const steps = useMemo(
     () => [
       {
