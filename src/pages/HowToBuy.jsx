@@ -1,14 +1,206 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+const BRAND = "#7B1E1E";
+
 const WHATSAPP =
   "https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20order%20produk%20digital.%20Tolong%20dibantu%20ya.";
 
-const HowToBuy = () => {
-  const [activeStep, setActiveStep] = useState(1);
+// 🔴 Background animasi yang sama dengan Home
+const GradientOrbs = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <style>{`
+        @keyframes float-orb {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(28px, -28px, 0) scale(1.08); }
+          50% { transform: translate3d(-18px, -42px, 0) scale(0.95); }
+          75% { transform: translate3d(18px, -22px, 0) scale(1.04); }
+        }
 
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.25; filter: blur(60px); }
+          50% { opacity: 0.55; filter: blur(85px); }
+        }
+
+        .orb {
+          animation: float-orb 20s ease-in-out infinite, pulse-glow 8s ease-in-out infinite;
+          will-change: transform, opacity, filter;
+        }
+      `}</style>
+
+      <div
+        className="orb absolute top-[-10%] right-[-5%] w-[520px] h-[520px] rounded-full bg-gradient-to-br from-[#7B1E1E]/25 via-[#9B2E2E]/15 to-transparent"
+        style={{ animationDelay: "0s" }}
+      />
+      <div
+        className="orb absolute bottom-[-15%] left-[-10%] w-[620px] h-[620px] rounded-full bg-gradient-to-tr from-[#7B1E1E]/22 via-[#9B2E2E]/12 to-transparent"
+        style={{ animationDelay: "3s" }}
+      />
+      <div
+        className="orb absolute top-[40%] left-[20%] w-[420px] h-[420px] rounded-full bg-gradient-to-br from-[#7B1E1E]/18 via-[#9B2E2E]/10 to-transparent"
+        style={{ animationDelay: "6s" }}
+      />
+    </div>
+  );
+};
+
+const FloatingParticles = () => {
+  const particlesSmall = useMemo(
+    () =>
+      [...Array(18)].map((_, i) => ({
+        id: `s-${i}`,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        duration: `${10 + Math.random() * 10}s`,
+        opacity: 0.15 + Math.random() * 0.15,
+      })),
+    []
+  );
+
+  const particlesMed = useMemo(
+    () =>
+      [...Array(8)].map((_, i) => {
+        const size = 40 + Math.random() * 70;
+        return {
+          id: `m-${i}`,
+          size,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          delay: `${Math.random() * 5}s`,
+          duration: `${14 + Math.random() * 10}s`,
+        };
+      }),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          25% { transform: translate3d(10px, -18px, 0); }
+          50% { transform: translate3d(-10px, -36px, 0); }
+          75% { transform: translate3d(6px, -18px, 0); }
+        }
+        .particle {
+          animation-name: float;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          will-change: transform;
+        }
+      `}</style>
+
+      {particlesSmall.map((p) => (
+        <div
+          key={p.id}
+          className="particle absolute w-2 h-2 rounded-full bg-[#7B1E1E]/20"
+          style={{
+            left: p.left,
+            top: p.top,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            opacity: p.opacity,
+          }}
+        />
+      ))}
+
+      {particlesMed.map((p) => (
+        <div
+          key={p.id}
+          className="particle absolute rounded-full bg-gradient-to-br from-[#7B1E1E]/10 to-transparent"
+          style={{
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            left: p.left,
+            top: p.top,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Icon 1-tone (pakai svg, ikut warna text / currentColor)
+const StepIcon = ({ id }) => {
+  const base = "w-10 h-10 md:w-12 md:h-12";
+  switch (id) {
+    case 1:
+      return (
+        <svg viewBox="0 0 24 24" className={base} fill="none">
+          <path
+            d="M4 5h2l2 11h9l2-8H8"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="10" cy="19" r="1.4" stroke="currentColor" strokeWidth="1.6" />
+          <circle cx="17" cy="19" r="1.4" stroke="currentColor" strokeWidth="1.6" />
+        </svg>
+      );
+    case 2:
+      return (
+        <svg viewBox="0 0 24 24" className={base} fill="none">
+          <rect
+            x="3.5"
+            y="6"
+            width="17"
+            height="12"
+            rx="2.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+          <rect x="6" y="11" width="6" height="1.7" fill="currentColor" />
+          <rect x="6" y="14.5" width="3.5" height="1.4" fill="currentColor" />
+        </svg>
+      );
+    case 3:
+      return (
+        <svg viewBox="0 0 24 24" className={base} fill="none">
+          <circle cx="12" cy="12" r="7.5" stroke="currentColor" strokeWidth="1.8" />
+          <path
+            d="M12 8v4l2.5 2.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case 4:
+      return (
+        <svg viewBox="0 0 24 24" className={base} fill="none">
+          <circle cx="12" cy="12" r="7.5" stroke="currentColor" strokeWidth="1.8" />
+          <path
+            d="M8.5 12.2 11 14.5 15.3 9.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 24 24" className={base} fill="none">
+          <path
+            d="M12 4.5 13.4 9 18 10.5 13.4 12 12 16.5 10.6 12 6 10.5 10.6 9 12 4.5Z"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+  }
+};
+
+const HowToBuy = () => {
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -17,110 +209,60 @@ const HowToBuy = () => {
       offset: 80,
     });
 
-    // ✅ set judul tab untuk halaman Cara Pembelian
     document.title = "Orinimo Store - Cara Pembelian";
   }, []);
 
-  // ✅ Refresh AOS setiap kali activeStep berubah
-  useEffect(() => {
-    AOS.refresh();
-  }, [activeStep]);
-
   const steps = useMemo(
-    () => [
-      {
-        id: 1,
-        title: "Pilih Produk",
-        desc:
-          "Buka halaman Produk, lalu pilih layanan/paket yang kamu butuhkan (Netflix, Spotify, Canva, VPN, dll).",
-        tips: [
-          "Kalau bingung pilih paket, kamu bisa konsultasi dulu.",
-          "Cek durasi paket dan ketentuan akun (sharing/private).",
-        ],
-        icon: "🛒",
-      },
-      {
-        id: 2,
-        title: "Kirim Detail Pesanan",
-        desc:
-          "Hubungi admin via WhatsApp dan kirimkan detail produk + paket. Admin akan konfirmasi stok & harga.",
-        tips: [
-          "Format cepat: Nama • Produk • Paket • Durasi",
-          "Contoh: R • Netflix • 1 Bulan • Private",
-        ],
-        icon: "💬",
-      },
-      {
-        id: 3,
-        title: "Lakukan Pembayaran",
-        desc:
-          "Admin akan kirim metode pembayaran. Setelah transfer, kirim bukti pembayaran agar pesanan diproses.",
-        tips: ["Pastikan nominal sesuai.", "Simpan bukti transfer sampai order selesai."],
-        icon: "💳",
-      },
-      {
-        id: 4,
-        title: "Proses & Aktivasi",
-        desc:
-          "Admin memproses pesanan dan mengirimkan detail akun/aktivasi + panduan penggunaan.",
-        tips: ["Ikuti panduan login/aktivasi yang diberikan.", "Jangan ubah data akun kalau tidak diminta."],
-        icon: "⚡️",
-      },
-      {
-        id: 5,
-        title: "Selesai & Support",
-        desc:
-          "Kalau ada kendala, kamu bisa chat admin. Kami bantu sampai akun kamu aman digunakan.",
-        tips: ["Kirim screenshot error jika ada.", "Sebutkan produk + paket agar admin cepat cek."],
-        icon: "🛡️",
-      },
-    ],
-    []
-  );
+  () => [
+    {
+      id: 1,
+      title: "Pilih produk yang diinginkan",
+      desc: "Pilih layanan/paket yang kamu butuhkan (Netflix, Disney, Canva, ChatGPT dll).",
+    },
+    {
+      id: 2,
+      title: "Mengisi data diri",
+      desc: "Kirimkan data yang diminta admin (nama, email/akun, dan info lain yang diperlukan).",
+    },
+    {
+      id: 3,
+      title: "Melakukan Pembayaran",
+      desc: "Admin akan kirim metode pembayaran. Transfer sesuai nominal yang diberikan.",
+    },
+    {
+      id: 4,
+      title: "Akun akan dikirim melalui WhatsApp",
+      desc: "Setelah pembayaran terkonfirmasi, detail akun/aktivasi dan panduan penggunaan dikirim via WhatsApp.",
+    },
+    {
+      id: 5,
+      title: "Selesai",
+      desc: "Akun siap digunakan. Jika ada kendala, hubungi admin untuk bantuan.",
+    },
+  ],
+  []
+);
 
-  const active = steps.find((s) => s.id === activeStep);
 
   return (
     <div className="bg-white font-poppins">
       <style>{`
-        @keyframes floatSoft {
-          0%,100% { transform: translate3d(-2%, -2%, 0) scale(1); }
-          50% { transform: translate3d(2%, 2%, 0) scale(1.06); }
-        }
         @keyframes shimmerX {
           0% { transform: translateX(-120%); }
           100% { transform: translateX(120%); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .bg-anim { animation: none !important; }
           .shimmer { animation: none !important; }
         }
       `}</style>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-white">
-        <div
-          aria-hidden
-          className="bg-anim pointer-events-none absolute -top-28 -left-28 h-80 w-80 rounded-full blur-3xl opacity-60"
-          style={{ background: "rgba(123,30,30,0.18)", animation: "floatSoft 14s ease-in-out infinite" }}
-        />
-        <div
-          aria-hidden
-          className="bg-anim pointer-events-none absolute -bottom-28 -right-28 h-80 w-80 rounded-full blur-3xl opacity-50"
-          style={{ background: "rgba(123,30,30,0.14)", animation: "floatSoft 16s ease-in-out infinite" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.18) 1px, transparent 0)",
-            backgroundSize: "22px 22px",
-          }}
-        />
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/70 to-white" />
+      {/* Hero – animasi sama seperti Home */}
+      <section className="relative overflow-hidden bg-white pb-8">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white pointer-events-none" />
 
-        <div className="container-page py-14 md:py-16 text-center relative">
+        <div className="container-page py-14 md:py-16 text-center relative z-10">
           <p
             data-aos="fade-up"
             className="inline-flex items-center gap-2 rounded-full bg-[#7B1E1E]/10 px-4 py-2 text-sm font-semibold text-[#7B1E1E]"
@@ -156,8 +298,10 @@ const HowToBuy = () => {
               className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-6 py-3 text-white font-semibold hover:opacity-95 transition shadow-sm"
             >
               <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+                <span
+                  className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                />
               </span>
               <span className="relative">Lihat Produk</span>
             </Link>
@@ -169,201 +313,99 @@ const HowToBuy = () => {
               className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg border border-[#7B1E1E] px-6 py-3 text-[#7B1E1E] font-semibold hover:bg-[#7B1E1E] hover:text-white transition"
             >
               <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-                <span className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/22 to-transparent"
-                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }} />
+                <span
+                  className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/22 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                />
               </span>
               <span className="relative">Order via WhatsApp</span>
             </a>
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600">
-            {[
-              { t: "✅ Proses cepat", d: 380 },
-              { t: "✅ Aman & terpercaya", d: 460 },
-              { t: "✅ Support responsif", d: 540 },
-            ].map((b) => (
-              <span
-                key={b.t}
-                data-aos="fade-up"
-                data-aos-delay={b.d}
-                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md transition"
-              >
-                {b.t}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="py-12 bg-white">
-        <div className="container-page">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Step list */}
-            <div className="lg:col-span-5">
-              <h2 data-aos="fade-up" className="text-2xl font-bold text-slate-900">
-                Langkah-langkah
-              </h2>
-              <p data-aos="fade-up" data-aos-delay="100" className="mt-2 text-slate-600">
-                Klik langkah di bawah untuk melihat detail dan tipsnya.
-              </p>
+      {/* Steps + FAQ */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white pointer-events-none" />
 
-              <div className="mt-6 space-y-3">
-                {steps.map((s, idx) => {
-                  const isActive = s.id === activeStep;
-                  return (
-                    <button
-                      key={s.id}
-                      onClick={() => setActiveStep(s.id)}
-                      data-aos="fade-up"
-                      data-aos-delay={Math.min(idx * 80, 240)}
-                      className={[
-                        "group w-full text-left rounded-2xl border p-4 transition hover:shadow-sm",
-                        isActive
-                          ? "border-[#7B1E1E]/30 bg-[#7B1E1E]/5 shadow-sm"
-                          : "border-slate-200 bg-white hover:bg-slate-50",
-                      ].join(" ")}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div
-                          className={[
-                            "h-10 w-10 rounded-xl flex items-center justify-center text-lg transition-transform group-hover:scale-105",
-                            isActive ? "bg-[#7B1E1E] text-white" : "bg-slate-100 text-slate-700",
-                          ].join(" ")}
-                        >
-                          {s.icon}
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between gap-3">
-                            <p className="font-bold text-slate-900">
-                              {s.id}. {s.title}
-                            </p>
-                            {isActive && (
-                              <span className="text-xs font-semibold text-[#7B1E1E]">Aktif</span>
-                            )}
-                          </div>
-                          <p className="mt-1 text-sm text-slate-600">{s.desc}</p>
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Step detail */}
-            <div className="lg:col-span-7">
-              <div
-                data-aos="fade-left"
-                className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 md:p-8 shadow-sm"
-              >
+        <div className="container-page relative z-10">
+          
+          {/* Steps Grid – card merah, font putih */}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {steps.map((step, idx) => (
                 <div
-                  aria-hidden
-                  className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl"
-                  style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
-                />
-
-                <div className="relative">
-                  <div className="flex items-start gap-4">
-                    <div className="h-12 w-12 rounded-2xl bg-[#7B1E1E] text-white flex items-center justify-center text-xl">
-                      {active?.icon}
+                  key={step.id}
+                  data-aos="zoom-in"
+                  data-aos-delay={idx * 100}
+                  className="group relative"
+                >
+                  <div className="relative bg-gradient-to-br from-[#7B1E1E] to-[#9B2C2C] text-white rounded-3xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col items-center text-center border border-[#8F1F1F]">
+                    {/* Number badge – mirip contoh, simple circle */}
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+                      <div className="flex items-center justify-center w-11 h-11 rounded-full border border-white/70 bg-[#A52A2A] text-white text-sm font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.25)]">
+                        {step.id}
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-slate-900">
-                        {activeStep}. {active?.title}
-                      </h3>
-                      <p className="mt-2 text-slate-600 leading-relaxed">{active?.desc}</p>
+
+                    {/* Icon container – kotak rounded, 1 tone */}
+                    <div className="mt-5 mb-5 w-24 h-24 flex items-center justify-center rounded-2xl bg-[#B93737] border border-white/10 shadow-[0_10px_25px_rgba(0,0,0,0.18)]">
+                      <div className="text-white">
+                        <StepIcon id={step.id} />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="mt-6">
-                    <h4 data-aos="fade-up" data-aos-delay="100" className="font-bold text-slate-900">
-                      Tips biar cepat diproses
-                    </h4>
-                    <ul className="mt-3 space-y-2 text-slate-700">
-                      {active?.tips?.map((t, idx) => (
-                        <li
-                          key={idx}
-                          data-aos="fade-up"
-                          data-aos-delay={150 + idx * 80}
-                          className="flex gap-2"
-                        >
-                          <span className="mt-0.5">✅</span>
-                          <span>{t}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    {/* Title & desc */}
+                    <h3 className="font-bold text-white text-lg mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-white/90 text-sm leading-relaxed flex-1">
+                      {step.desc}
+                    </p>
 
+                    <div className="mt-4 w-16 h-1 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ Section – lebar sama dengan steps */}
+          <div className="mt-10 max-w-7xl mx-auto">
+            <div
+              data-aos="fade-up"
+              className="bg-white rounded-3xl p-8 shadow-md border border-slate-100"
+            >
+              <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center flex items-center justify-center gap-2">
+                <span>❓</span> Pertanyaan Singkat
+              </h3>
+              <div className="space-y-5">
+                {[
+                  {
+                    q: "Berapa lama prosesnya?",
+                    a: "Umumnya cepat setelah pembayaran dikonfirmasi. Jika ramai, admin akan info estimasi.",
+                  },
+                  {
+                    q: "Kalau ada kendala login?",
+                    a: "Chat admin + kirim screenshot error. Kami bantu sampai aman.",
+                  },
+                  {
+                    q: "Bisa konsultasi sebelum beli?",
+                    a: "Bisa. Klik tombol WhatsApp dan bilang kebutuhanmu.",
+                  },
+                ].map((faq, idx) => (
                   <div
-                    data-aos="zoom-in"
-                    data-aos-delay="220"
-                    className="mt-7 flex flex-col sm:flex-row gap-3"
+                    key={idx}
+                    data-aos="fade-up"
+                    data-aos-delay={100 + idx * 80}
+                    className="bg-slate-50 rounded-xl p-5 border-l-4 border-[#7B1E1E] hover:bg-slate-100 transition"
                   >
-                    <a
-                      href={WHATSAPP}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white border border-slate-200 px-5 py-3 font-semibold text-slate-900 hover:bg-slate-100 transition"
-                    >
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
-                      >
-                        <span
-                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/60 to-transparent"
-                          style={{ animation: "shimmerX 1.3s ease-in-out infinite" }}
-                        />
-                      </span>
-                      <span className="relative">Tanya Admin via WhatsApp</span>
-                    </a>
-
-                    <Link
-                      to="/produk"
-                      className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-5 py-3 font-semibold text-white hover:opacity-95 transition"
-                    >
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
-                      >
-                        <span
-                          className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                          style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
-                        />
-                      </span>
-                      <span className="relative">Lihat Produk</span>
-                    </Link>
+                    <p className="font-semibold text-slate-900 mb-2">{faq.q}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed">{faq.a}</p>
                   </div>
-                </div>
-              </div>
-
-              {/* FAQ mini */}
-              <div
-                data-aos="fade-up"
-                className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition"
-              >
-                <h4 className="font-bold text-slate-900">Pertanyaan singkat</h4>
-                <div className="mt-4 space-y-3 text-slate-700">
-                  {[
-                    {
-                      q: "Berapa lama prosesnya?",
-                      a: "Umumnya cepat setelah pembayaran dikonfirmasi. Jika ramai, admin akan info estimasi.",
-                    },
-                    {
-                      q: "Kalau ada kendala login?",
-                      a: "Chat admin + kirim screenshot error. Kami bantu sampai aman.",
-                    },
-                    {
-                      q: "Bisa konsultasi sebelum beli?",
-                      a: "Bisa. Klik tombol WhatsApp dan bilang kebutuhanmu.",
-                    },
-                  ].map((it, idx) => (
-                    <div key={it.q} data-aos="fade-up" data-aos-delay={100 + idx * 80}>
-                      <p className="font-semibold">{it.q}</p>
-                      <p className="text-slate-600">{it.a}</p>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -371,8 +413,12 @@ const HowToBuy = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-12 bg-white">
-        <div className="container-page">
+      <section className="py-16 bg-white relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white pointer-events-none" />
+
+        <div className="container-page relative z-10">
           <div
             data-aos="fade-up"
             className="relative overflow-hidden rounded-3xl bg-[#7B1E1E] text-white p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
