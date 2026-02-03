@@ -116,19 +116,6 @@ const About = () => {
           >
             Misi kami memudahkan akses ke layanan digital premium untuk semua orang di Indonesia.
           </p>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600">
-            {["✅ Legal & aman", "✅ Proses cepat", "✅ Support responsif"].map((t, i) => (
-              <span
-                key={t}
-                data-aos="fade-up"
-                data-aos-delay={320 + i * 80}
-                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#7B1E1E]/20 transition-all cursor-default"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 

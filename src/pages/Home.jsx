@@ -46,7 +46,7 @@ const GradientOrbs = () => {
 
 const FloatingParticles = () => {
   const particlesSmall = useMemo(() => {
-    return [...Array(18)].map((_, i) => ({
+    return [...Array(10)].map((_, i) => ({
       id: `s-${i}`,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
@@ -57,7 +57,7 @@ const FloatingParticles = () => {
   }, []);
 
   const particlesMed = useMemo(() => {
-    return [...Array(8)].map((_, i) => {
+    return [...Array(4)].map((_, i) => {
       const size = 40 + Math.random() * 70;
       return {
         id: `m-${i}`,
@@ -185,7 +185,7 @@ const Home = () => {
             </Link>
 
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Orinimo%20Store,%20saya%20ingin%20bertanya%20tentang%20produk%20digital."
+              href="https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20bertanya%20tentang%20produk%20digital."
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center w-full sm:w-auto rounded-lg border border-[#7B1E1E] px-6 py-3 text-[#7B1E1E] font-semibold hover:bg-[#7B1E1E] hover:text-white transition overflow-hidden hover:shadow-xl hover:shadow-[#7B1E1E]/20"
@@ -218,8 +218,11 @@ const Home = () => {
       </section>
 
       {/* Feature */}
-      <section className="py-14 bg-white">
-        <div className="container-page">
+      <section className="py-14 bg-white relative overflow-hidden">
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white pointer-events-none" />
+        
+        <div className="container-page relative z-10">
           <h2
             data-aos="fade-up"
             className="text-2xl md:text-3xl font-bold text-slate-900 text-center"
@@ -319,9 +322,239 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Produk Populer */}
+      <section className="py-14 bg-slate-50 relative overflow-hidden">
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50/70 via-transparent to-slate-50 pointer-events-none" />
+        
+        <div className="container-page relative z-10">
+          <div className="text-center mb-10">
+            <h2
+              data-aos="fade-up"
+              className="text-2xl md:text-3xl font-bold text-slate-900"
+            >
+              Produk{" "}
+              <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">
+                Populer
+              </span>
+            </h2>
+            <p
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="mt-3 text-slate-600 max-w-2xl mx-auto"
+            >
+              Produk digital premium yang paling banyak dipilih pelanggan kami
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "Netflix Premium",
+                price: 12000,
+                image: "/images/products/netflix.png",
+                desc: "Streaming film & series dengan kualitas 4K",
+                delay: 0,
+              },
+              {
+                name: "Disney+ Hotstar",
+                price: 4000,
+                image: "/images/products/disney.png",
+                desc: "Film Disney, Marvel, Pixar dan lainnya",
+                delay: 100,
+              },
+              {
+                name: "ChatGPT Plus",
+                price: 3000,
+                image: "/images/products/chatgpt.png",
+                desc: "AI assistant premium untuk produktivitas",
+                delay: 200,
+              },
+              {
+                name: "Vidio Premium",
+                price: 20000,
+                image: "/images/products/vidio.png",
+                desc: "Streaming tanpa batas konten lokal & internasional",
+                delay: 300,
+              },
+            ].map((product) => (
+              <div
+                key={product.name}
+                data-aos="fade-up"
+                data-aos-delay={product.delay}
+                className="group relative overflow-hidden bg-white border-2 border-slate-200 rounded-xl transition-all hover:scale-[1.03] hover:shadow-xl hover:border-[#7B1E1E]/30"
+              >
+                {/* Hover effects */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(123,30,30,0.08), rgba(255,255,255,0) 55%)",
+                  }}
+                />
+                <div
+                  className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ backgroundColor: "rgba(123,30,30,0.18)" }}
+                />
+
+                <div className="relative">
+                  <div className="overflow-hidden rounded-t-xl bg-slate-100 aspect-square">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover object-center"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{product.name}</h3>
+                    <p className="text-slate-600 text-sm mb-3 line-clamp-2">{product.desc}</p>
+
+                    <div className="mb-4">
+                      <p className="text-xs uppercase tracking-wide text-slate-500">Mulai dari</p>
+                      <p className="text-2xl font-bold text-[#7B1E1E]">
+                        Rp {product.price.toLocaleString("id-ID")}
+                      </p>
+                    </div>
+
+                    <Link
+                      to="/produk"
+                      className="group/btn relative w-full inline-flex items-center justify-center text-white py-3 rounded-lg font-bold transition-colors overflow-hidden bg-[#7B1E1E] hover:bg-[#5A1414]"
+                    >
+                      <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                      <span className="relative">Lihat Detail</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10" data-aos="fade-up" data-aos-delay="400">
+            <Link
+              to="/produk"
+              className="group inline-flex items-center justify-center rounded-lg border-2 border-[#7B1E1E] px-8 py-3 text-[#7B1E1E] font-semibold hover:bg-[#7B1E1E] hover:text-white transition overflow-hidden relative"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/18 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative">Lihat Semua Produk</span>
+              <span className="relative ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Cara Pembelian */}
+      <section className="py-14 bg-white relative overflow-hidden">
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white pointer-events-none" />
+        
+        <div className="container-page relative z-10">
+          <div className="text-center mb-10">
+            <h2
+              data-aos="fade-up"
+              className="text-2xl md:text-3xl font-bold text-slate-900"
+            >
+              Cara{" "}
+              <span className="bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] bg-clip-text text-transparent">
+                Pembelian
+              </span>
+            </h2>
+            <p
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="mt-3 text-slate-600 max-w-2xl mx-auto"
+            >
+              Proses order yang mudah dan cepat, hanya 5 langkah
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                step: 1,
+                title: "Pilih Produk",
+                desc: "Pilih produk dan paket yang kamu butuhkan",
+                icon: "🛒",
+                delay: 0,
+              },
+              {
+                step: 2,
+                title: "Pembayaran",
+                desc: "Transfer sesuai nominal yang diberikan admin",
+                icon: "💳",
+                delay: 100,
+              },
+              {
+                step: 3,
+                title: "Menunggu Proses",
+                desc: "Admin memproses pesanan setelah pembayaran dikonfirmasi",
+                icon: "⏱️",
+                delay: 200,
+              },
+              {
+                step: 4,
+                title: "Pesanan Diterima",
+                desc: "Detail akun dikirim ke WhatsApp kamu",
+                icon: "✅",
+                delay: 300,
+              },
+              {
+                step: 5,
+                title: "Selesai!",
+                desc: "Akun siap digunakan, jika ada kendala hubungi admin",
+                icon: "🎉",
+                delay: 400,
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                data-aos="zoom-in"
+                data-aos-delay={item.delay}
+                className="group relative"
+              >
+                <div className="relative bg-white rounded-2xl p-6 border-2 border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col items-center text-center">
+                  {/* Step Number Badge */}
+                  <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-[#7B1E1E] to-[#9B2C2C] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md z-10">
+                    {item.step}
+                  </div>
+
+                  {/* Icon Container */}
+                  <div className="w-20 h-20 mb-4 flex items-center justify-center bg-gradient-to-br from-[#7B1E1E]/5 to-[#7B1E1E]/10 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                    <span className="text-4xl">{item.icon}</span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-bold text-slate-900 text-base mb-2">{item.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-slate-600 text-sm leading-relaxed flex-1">{item.desc}</p>
+
+                  {/* Hover indicator */}
+                  <div className="mt-4 w-12 h-1 bg-gradient-to-r from-[#7B1E1E] to-[#9B2C2C] rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10" data-aos="fade-up" data-aos-delay="500">
+            <Link
+              to="/cara-pembelian"
+              className="group inline-flex items-center justify-center rounded-lg bg-[#7B1E1E] px-8 py-3 text-white font-semibold hover:opacity-95 transition shadow-sm hover:shadow-xl hover:shadow-[#7B1E1E]/25 overflow-hidden relative"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/18 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative">Lihat Detail Cara Pembelian</span>
+              <span className="relative ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="py-14 bg-white">
-        <div className="container-page">
+      <section className="py-14 bg-white relative overflow-hidden">
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white pointer-events-none" />
+        
+        <div className="container-page relative z-10">
           <div
             data-aos="fade-up"
             className="relative rounded-3xl bg-[#7B1E1E] text-white p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden"
