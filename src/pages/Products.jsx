@@ -403,7 +403,7 @@ const Products = () => {
             className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold bg-[#7B1E1E]/10 text-[#7B1E1E] border border-[#7B1E1E]/10"
           >
             <span aria-hidden>✨</span>
-            Hemat sampai 70% • Legal & Aman
+            Hemat sampai 70% • Terpercaya & Aman
           </p>
 
           <h1
