@@ -23,12 +23,12 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg">Orinimo Store</h3>
             <p className="text-sm mt-2 text-white/90 leading-relaxed max-w-sm">
-              Penyedia produk digital premium yang legal, aman, dan terjangkau untuk pengguna di Indonesia.
+              Penyedia produk digital premium yang aman, dan terjangkau untuk pengguna di Indonesia.
             </p>
 
             <div className="mt-4 flex items-center gap-3">
               <a
-                href="https://instagram.com/orinimostore"
+                href="https://www.instagram.com/orinimo.premapps"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 hover:bg-white/15 transition hover:shadow-lg hover:shadow-black/10"
@@ -90,7 +90,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold">Kontak</h4>
             <ul className="mt-3 space-y-2 text-sm text-white/90">
-              <li>Email: support@orinimo.store</li>
+              <li>Instagram: @orinimo.premapps</li>
               <li>WA: +62 812-3456-7890</li>
               <li>Jam: 09.00 - 21.00 WIB</li>
             </ul>
@@ -98,7 +98,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-white/80">
-          <p>&copy; {new Date().getFullYear()} Orinimo Store. Semua hak dilindungi.</p>
+          <p>&copy; {new Date().getFullYear()} Orinimo Store. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
