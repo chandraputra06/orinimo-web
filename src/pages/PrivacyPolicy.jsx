@@ -17,12 +17,18 @@ const PrivacyPolicy = () => {
         <div
           aria-hidden
           className="bg-anim pointer-events-none absolute -top-28 -right-28 h-80 w-80 rounded-full blur-3xl opacity-60"
-          style={{ backgroundColor: "rgba(123,30,30,0.14)", animation: "floatSoft 14s ease-in-out infinite" }}
+          style={{
+            backgroundColor: "rgba(123,30,30,0.14)",
+            animation: "floatSoft 14s ease-in-out infinite",
+          }}
         />
         <div
           aria-hidden
           className="bg-anim pointer-events-none absolute -bottom-28 -left-28 h-80 w-80 rounded-full blur-3xl opacity-55"
-          style={{ backgroundColor: "rgba(123,30,30,0.12)", animation: "floatSoft 16s ease-in-out infinite" }}
+          style={{
+            backgroundColor: "rgba(123,30,30,0.12)",
+            animation: "floatSoft 16s ease-in-out infinite",
+          }}
         />
         <div
           aria-hidden
@@ -33,21 +39,34 @@ const PrivacyPolicy = () => {
             backgroundSize: "22px 22px",
           }}
         />
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50 via-slate-50/70 to-slate-50" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50 via-slate-50/70 to-slate-50"
+        />
 
         <div className="container-page relative">
-          <p
-            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold border"
-            style={{ backgroundColor: "rgba(123,30,30,0.10)", color: BRAND, borderColor: "rgba(123,30,30,0.12)" }}
-          >
-            <span aria-hidden>🔐</span>
-            Privasi & keamanan
-          </p>
+          {/* ✅ heading + subheading center */}
+          <div className="text-center">
+            <p
+              className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold border mx-auto"
+              style={{
+                backgroundColor: "rgba(123,30,30,0.10)",
+                color: BRAND,
+                borderColor: "rgba(123,30,30,0.12)",
+              }}
+            >
+              <span aria-hidden>🔐</span>
+              Privasi & keamanan
+            </p>
 
-          <h1 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">Kebijakan Privasi</h1>
-          <p className="mt-3 text-slate-600 max-w-3xl">
-            Privasi kamu penting. Berikut ringkasan kebijakan privasi Orinimo Store.
-          </p>
+            <h1 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
+              Kebijakan Privasi
+            </h1>
+
+            <p className="mt-3 text-slate-600 max-w-3xl mx-auto">
+              Privasi kamu penting. Berikut ringkasan kebijakan privasi Orinimo Store.
+            </p>
+          </div>
 
           <div className="mt-8 space-y-4">
             {[
@@ -87,10 +106,6 @@ const PrivacyPolicy = () => {
               </div>
             ))}
           </div>
-
-          <p className="mt-8 text-sm text-slate-500">
-            Catatan: Ini template ringkas. Sesuaikan lagi jika kamu sudah punya kebijakan privasi resmi.
-          </p>
         </div>
       </section>
     </div>
