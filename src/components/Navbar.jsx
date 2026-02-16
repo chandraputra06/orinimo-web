@@ -1,8 +1,11 @@
-import { useMemo, useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useMemo, useState, useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+  const location = useLocation();
 
   const navItems = useMemo(
     () => [
@@ -15,6 +18,7 @@ const Navbar = () => {
     []
   );
 
+  // Close when resizing to desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setIsOpen(false);
@@ -22,6 +26,39 @@ const Navbar = () => {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  // Close on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Close when clicking outside (anywhere)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onPointerDown = (e) => {
+      const menuEl = menuRef.current;
+      const btnEl = buttonRef.current;
+
+      const clickedMenu = menuEl && menuEl.contains(e.target);
+      const clickedBtn = btnEl && btnEl.contains(e.target);
+
+      if (!clickedMenu && !clickedBtn) setIsOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [isOpen]);
+
+  // Lock body scroll on mobile menu open (optional but nice)
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
 
   const navLinkClass = ({ isActive }) =>
     [
@@ -76,56 +113,94 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile button */}
+            {/* Mobile button (animated) */}
             <button
+              ref={buttonRef}
               className="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-white/10 transition"
-              aria-label="Toggle menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
               onClick={() => setIsOpen((v) => !v)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {isOpen ? (
-                  <>
-                    <path d="M18 6 6 18" />
-                    <path d="m6 6 12 12" />
-                  </>
-                ) : (
-                  <>
-                    <path d="M4 6h16" />
-                    <path d="M4 12h16" />
-                    <path d="M4 18h16" />
-                  </>
-                )}
-              </svg>
+              <span className="relative block h-5 w-6">
+                <span
+                  className={[
+                    "absolute left-0 top-0 block h-0.5 w-6 rounded-full bg-white transition-transform duration-300",
+                    isOpen ? "translate-y-2 rotate-45" : "translate-y-0 rotate-0",
+                  ].join(" ")}
+                />
+                <span
+                  className={[
+                    "absolute left-0 top-2 block h-0.5 w-6 rounded-full bg-white transition-all duration-300",
+                    isOpen ? "opacity-0 translate-x-2" : "opacity-100 translate-x-0",
+                  ].join(" ")}
+                />
+                <span
+                  className={[
+                    "absolute left-0 top-4 block h-0.5 w-6 rounded-full bg-white transition-transform duration-300",
+                    isOpen ? "translate-y-[-8px] -rotate-45" : "translate-y-0 rotate-0",
+                  ].join(" ")}
+                />
+              </span>
             </button>
           </div>
+        </div>
 
-          {/* Mobile menu */}
-          {isOpen && (
-            <div className="md:hidden pb-4">
-              <div className="flex flex-col gap-2 rounded-2xl bg-white/10 p-3 border border-white/10 shadow-sm">
+        {/* Overlay + Mobile menu panel */}
+        <div
+          className={[
+            "md:hidden fixed inset-0 z-50",
+            isOpen ? "pointer-events-auto" : "pointer-events-none",
+          ].join(" ")}
+          aria-hidden={!isOpen}
+        >
+          {/* dark overlay */}
+          <div
+            className={[
+              "absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-200",
+              isOpen ? "opacity-100" : "opacity-0",
+            ].join(" ")}
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* panel */}
+          <div
+            ref={menuRef}
+            className={[
+              "absolute left-1/2 top-16 -translate-x-1/2 w-[92%] max-w-sm",
+              "rounded-2xl bg-[#7B1E1E] border border-white/10 shadow-xl overflow-hidden",
+              "transition-all duration-200",
+              isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2",
+            ].join(" ")}
+            role="dialog"
+            aria-label="Mobile navigation"
+          >
+            <div className="p-3">
+              <div className="flex flex-col items-center text-center gap-2 rounded-2xl bg-white/10 p-3 border border-white/10">
                 {navItems.map((item) => (
                   <NavLink
                     key={item.to}
                     to={item.to}
-                    className={navLinkClass}
+                    className={(args) =>
+                      [
+                        navLinkClass(args),
+                        "w-full justify-center flex", // center item
+                      ].join(" ")
+                    }
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
                   </NavLink>
                 ))}
               </div>
+
+              <button
+                className="mt-3 w-full rounded-xl border border-white/15 bg-white/10 py-2 text-sm font-semibold hover:bg-white/15 transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Tutup
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
