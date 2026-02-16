@@ -105,10 +105,11 @@ const PaymentMethods = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/70 to-slate-50" />
         </div>
 
-        <div className="container-page relative z-10 py-12 md:py-16">
+        {/* ✅ CENTER heading + subheading */}
+        <div className="container-page relative z-10 py-12 md:py-16 text-center">
           <div
             data-aos="fade-up"
-            className="inline-flex items-center gap-2 rounded-full bg-[#7B1E1E]/10 px-4 py-2 text-sm font-semibold text-[#7B1E1E]"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#7B1E1E]/10 px-4 py-2 text-sm font-semibold text-[#7B1E1E] mx-auto"
           >
             <span aria-hidden>💳</span>
             Pembayaran cepat & aman
@@ -120,13 +121,13 @@ const PaymentMethods = () => {
             className="mt-4 text-3xl md:text-4xl font-bold text-slate-900 leading-tight"
           >
             Metode Pembayaran
-            <span className="block text-[#7B1E1E]">yang tersedia</span>
+            <span className="text-[#7B1E1E]"> Yang Tersedia</span>
           </h1>
 
           <p
             data-aos="fade-up"
             data-aos-delay="220"
-            className="mt-3 text-slate-600 max-w-2xl"
+            className="mt-3 text-slate-600 max-w-2xl mx-auto"
           >
             Pilih metode pembayaran yang paling nyaman. Setelah transfer,{" "}
             <span className="font-semibold text-slate-800">konfirmasi ke admin</span>{" "}
@@ -152,12 +153,8 @@ const PaymentMethods = () => {
                     {it.icon}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-slate-900 text-lg">
-                      {it.title}
-                    </h3>
-                    <p className="mt-2 text-slate-600 leading-relaxed">
-                      {it.desc}
-                    </p>
+                    <h3 className="font-bold text-slate-900 text-lg">{it.title}</h3>
+                    <p className="mt-2 text-slate-600 leading-relaxed">{it.desc}</p>
 
                     <div className="mt-4 h-px bg-slate-100" />
 
@@ -169,16 +166,7 @@ const PaymentMethods = () => {
                       agar verifikasi cepat.
                     </p>
                   </div>
-                </div>
-
-                <div className="mt-5 flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#7B1E1E] bg-[#7B1E1E]/10 px-3 py-1 rounded-full">
-                    Aman & Praktis
-                  </span>
-                  <span className="text-xs text-slate-400 group-hover:text-slate-600 transition">
-                    Hover untuk fokus ✨
-                  </span>
-                </div>
+                </div>                  
               </div>
             ))}
           </div>
@@ -225,9 +213,7 @@ const PaymentMethods = () => {
                       </span>
                       <h3 className="font-bold text-slate-900">{s.title}</h3>
                     </div>
-                    <p className="mt-2 text-slate-600 leading-relaxed">
-                      {s.desc}
-                    </p>
+                    <p className="mt-2 text-slate-600 leading-relaxed">{s.desc}</p>
                   </div>
                 ))}
               </div>
@@ -239,8 +225,8 @@ const PaymentMethods = () => {
               >
                 <p className="text-slate-700">
                   <span className="font-bold text-[#7B1E1E]">Catatan:</span>{" "}
-                  Jika pembayaran sudah dilakukan tapi belum diproses, biasanya karena belum ada bukti transfer.
-                  Silakan kirim bukti pembayaran ke WhatsApp admin ya 🙌
+                  Jika pembayaran sudah dilakukan tapi belum diproses, biasanya karena belum ada bukti
+                  transfer. Silakan kirim bukti pembayaran ke WhatsApp admin ya 🙌
                 </p>
               </div>
             </div>
@@ -253,21 +239,9 @@ const PaymentMethods = () => {
             className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4"
           >
             {[
-              {
-                q: "Berapa lama verifikasi?",
-                a: "Biasanya cepat setelah bukti pembayaran diterima.",
-                icon: "⏱️",
-              },
-              {
-                q: "Bisa bayar selain yang tertera?",
-                a: "Tanyakan admin, tergantung ketersediaan metode.",
-                icon: "🔁",
-              },
-              {
-                q: "Salah transfer gimana?",
-                a: "Segera hubungi admin agar dibantu pengecekan.",
-                icon: "🆘",
-              },
+              { q: "Berapa lama verifikasi?", a: "Biasanya cepat setelah bukti pembayaran diterima.", icon: "⏱️" },
+              { q: "Bisa bayar selain yang tertera?", a: "Tanyakan admin, tergantung ketersediaan metode.", icon: "🔁" },
+              { q: "Salah transfer gimana?", a: "Segera hubungi admin agar dibantu pengecekan.", icon: "🆘" },
             ].map((f, i) => (
               <div
                 key={f.q}
