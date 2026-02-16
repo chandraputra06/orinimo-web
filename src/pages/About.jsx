@@ -1,73 +1,131 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const BRAND = "#7B1E1E";
+const WHATSAPP = "https://wa.me/+6281325505028";
 
-// Mesh Gradient Background Component
-const MeshGradient = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <style>{`
-      @keyframes mesh-move {
-        0% { transform: translate3d(0,0,0) scale(1); filter: blur(70px); }
-        50% { transform: translate3d(18px,-14px,0) scale(1.05); filter: blur(85px); }
-        100% { transform: translate3d(0,0,0) scale(1); filter: blur(70px); }
-      }
-      @keyframes mesh-move-2 {
-        0% { transform: translate3d(0,0,0) scale(1); filter: blur(80px); }
-        50% { transform: translate3d(-16px,12px,0) scale(1.06); filter: blur(95px); }
-        100% { transform: translate3d(0,0,0) scale(1); filter: blur(80px); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .mesh { animation: none !important; }
-      }
-    `}</style>
+// ✅ Background animasi (sama seperti halaman lain)
+const GradientOrbs = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <style>{`
+        @keyframes float-orb {
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(28px, -28px, 0) scale(1.08); }
+          50% { transform: translate3d(-18px, -42px, 0) scale(0.95); }
+          75% { transform: translate3d(18px, -22px, 0) scale(1.04); }
+        }
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.25; filter: blur(60px); }
+          50% { opacity: 0.55; filter: blur(85px); }
+        }
+        .orb {
+          animation: float-orb 20s ease-in-out infinite, pulse-glow 8s ease-in-out infinite;
+          will-change: transform, opacity, filter;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .orb { animation: none !important; }
+        }
+      `}</style>
 
-    <div
-      className="mesh absolute -top-40 -left-40 h-[34rem] w-[34rem] rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle at 30% 30%, rgba(123,30,30,0.35), rgba(155,46,46,0.12) 50%, transparent 70%)",
-        animation: "mesh-move 14s ease-in-out infinite",
-      }}
-    />
-    <div
-      className="mesh absolute -top-44 -right-44 h-[36rem] w-[36rem] rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle at 60% 40%, rgba(155,46,46,0.30), rgba(123,30,30,0.10) 55%, transparent 72%)",
-        animation: "mesh-move-2 16s ease-in-out infinite",
-      }}
-    />
-    <div
-      className="mesh absolute top-[30%] left-[18%] h-[28rem] w-[28rem] rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle at 40% 60%, rgba(123,30,30,0.22), rgba(155,46,46,0.10) 55%, transparent 74%)",
-        animation: "mesh-move 18s ease-in-out infinite",
-      }}
-    />
-    <div
-      className="mesh absolute bottom-[-45%] right-[-30%] h-[40rem] w-[40rem] rounded-full"
-      style={{
-        background:
-          "radial-gradient(circle at 35% 40%, rgba(123,30,30,0.25), rgba(155,46,46,0.08) 55%, transparent 75%)",
-        animation: "mesh-move-2 20s ease-in-out infinite",
-      }}
-    />
+      <div
+        className="orb absolute top-[-10%] right-[-5%] w-[520px] h-[520px] rounded-full bg-gradient-to-br from-[#7B1E1E]/25 via-[#9B2E2E]/15 to-transparent"
+        style={{ animationDelay: "0s" }}
+      />
+      <div
+        className="orb absolute bottom-[-15%] left-[-10%] w-[620px] h-[620px] rounded-full bg-gradient-to-tr from-[#7B1E1E]/22 via-[#9B2E2E]/12 to-transparent"
+        style={{ animationDelay: "3s" }}
+      />
+      <div
+        className="orb absolute top-[40%] left-[20%] w-[420px] h-[420px] rounded-full bg-gradient-to-br from-[#7B1E1E]/18 via-[#9B2E2E]/10 to-transparent"
+        style={{ animationDelay: "6s" }}
+      />
+    </div>
+  );
+};
 
-    {/* Dot pattern overlay */}
-    <div
-      aria-hidden
-      className="absolute inset-0 opacity-[0.10]"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle at 1px 1px, rgba(123,30,30,0.22) 1px, transparent 0)",
-        backgroundSize: "22px 22px",
-      }}
-    />
-  </div>
-);
+const FloatingParticles = () => {
+  const particlesSmall = useMemo(
+    () =>
+      [...Array(18)].map((_, i) => ({
+        id: `s-${i}`,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        duration: `${10 + Math.random() * 10}s`,
+        opacity: 0.15 + Math.random() * 0.15,
+      })),
+    []
+  );
+
+  const particlesMed = useMemo(
+    () =>
+      [...Array(8)].map((_, i) => {
+        const size = 40 + Math.random() * 70;
+        return {
+          id: `m-${i}`,
+          size,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          delay: `${Math.random() * 5}s`,
+          duration: `${14 + Math.random() * 10}s`,
+        };
+      }),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          25% { transform: translate3d(10px, -18px, 0); }
+          50% { transform: translate3d(-10px, -36px, 0); }
+          75% { transform: translate3d(6px, -18px, 0); }
+        }
+        .particle {
+          animation-name: float;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .particle { animation: none !important; }
+        }
+      `}</style>
+
+      {particlesSmall.map((p) => (
+        <div
+          key={p.id}
+          className="particle absolute w-2 h-2 rounded-full bg-[#7B1E1E]/20"
+          style={{
+            left: p.left,
+            top: p.top,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            opacity: p.opacity,
+          }}
+        />
+      ))}
+
+      {particlesMed.map((p) => (
+        <div
+          key={p.id}
+          className="particle absolute rounded-full bg-gradient-to-br from-[#7B1E1E]/10 to-transparent"
+          style={{
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            left: p.left,
+            top: p.top,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const About = () => {
   useEffect(() => {
@@ -77,25 +135,32 @@ const About = () => {
       once: true,
       offset: 80,
     });
-
-    // ✅ Set judul tab untuk halaman Tentang Kami
     document.title = "Orinimo Store - Tentang Kami";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (
     <div className="min-h-screen bg-white font-poppins">
-      {/* Hero Section dengan Mesh Gradient */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/30 to-white py-14 px-4 text-center">
-        {/* Mesh Gradient Background */}
-        <MeshGradient />
-        
-        {/* Gradient Overlay untuk smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white pointer-events-none" />
+      <style>{`
+        @keyframes shimmerX {
+          0% { transform: translateX(-120%); }
+          100% { transform: translateX(120%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .shimmer { animation: none !important; }
+        }
+      `}</style>
+
+      {/* Hero – ✅ sama animasinya */}
+      <section className="relative overflow-hidden bg-white py-14 px-4 text-center">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white pointer-events-none" />
 
         <div className="max-w-4xl mx-auto relative z-10">
           <p
             data-aos="fade-up"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#7B1E1E]/10 to-[#7B1E1E]/5 px-5 py-2.5 text-sm font-semibold text-[#7B1E1E] shadow-sm border border-[#7B1E1E]/10"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#7B1E1E]/10 px-5 py-2.5 text-sm font-semibold text-[#7B1E1E] shadow-sm border border-[#7B1E1E]/10"
           >
             <span aria-hidden className="animate-pulse">✨</span>
             Tentang kami
@@ -119,9 +184,13 @@ const About = () => {
         </div>
       </section>
 
-      {/* Story Section - Padding dikurangi */}
-      <section className="py-12 px-4 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Story */}
+      <section className="py-12 px-4 bg-white relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 data-aos="fade-up" className="text-3xl font-bold text-gray-900 mb-6">
             Cerita Kami
           </h2>
@@ -131,8 +200,8 @@ const About = () => {
             data-aos-delay="100"
             className="text-gray-700 text-lg leading-relaxed mb-5"
           >
-            Orinimo Store didirikan untuk memberikan solusi produk digital premium yang legal, aman,
-            dan terjangkau. Kami memahami bahwa harga langganan digital resmi seringkali terlalu mahal
+            Orinimo Store didirikan untuk memberikan solusi produk digital premium yang aman dan
+            terjangkau. Kami memahami bahwa harga langganan digital resmi seringkali terlalu mahal
             bagi sebagian besar masyarakat Indonesia.
           </p>
 
@@ -145,15 +214,19 @@ const About = () => {
             <span className="font-semibold text-slate-800">
               transparansi, kejujuran, kemudahan, dan keamanan
             </span>
-            , kami berkomitmen untuk memastikan pengalaman terbaik bagi setiap pelanggan. Kami hanya
+            , kami berkomitmen memastikan pengalaman terbaik bagi setiap pelanggan. Kami hanya
             menyediakan produk dari sumber resmi dan terpercaya.
           </p>
         </div>
       </section>
 
-      {/* Values Section - Padding dikurangi */}
-      <section className="py-12 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
+      {/* Values */}
+      <section className="py-12 px-4 bg-slate-50 relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <h2 data-aos="fade-up" className="text-3xl font-bold text-center text-gray-900 mb-10">
             Nilai-Nilai Kami
           </h2>
@@ -162,14 +235,15 @@ const About = () => {
             {[
               {
                 icon: "🔒",
-                title: "Legal & Terpercaya",
+                // ✅ hilangin kata LEGAL
+                title: "Terpercaya",
                 desc: "Semua produk bersumber dari penyedia resmi dan aman digunakan. Kami tidak pernah menjual akun bajakan atau ilegal.",
                 gradient: "from-[#7B1E1E]/8 to-transparent",
               },
               {
                 icon: "💬",
                 title: "Support Responsif",
-                desc: "Tim customer service kami siap membantu Anda 24/7 via WhatsApp atau Telegram untuk menjawab pertanyaan dan keluhan.",
+                desc: "Tim customer service kami siap membantu Anda via WhatsApp atau Telegram untuk menjawab pertanyaan dan keluhan.",
                 gradient: "from-[#9B2E2E]/8 to-transparent",
               },
               {
@@ -185,12 +259,9 @@ const About = () => {
                 data-aos-delay={Math.min(idx * 120, 240)}
                 className="group relative overflow-hidden bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-slate-100"
               >
-                {/* Gradient overlay on hover */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
-                
-                {/* Decorative glow */}
                 <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-[#7B1E1E]/8 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10">
@@ -200,9 +271,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#7B1E1E] transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.desc}
-                  </p>
+                  <p className="text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -210,13 +279,14 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section - Padding dikurangi */}
-      <section className="py-12 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            data-aos="fade-up"
-            className="text-3xl font-bold text-center text-gray-900 mb-10"
-          >
+      {/* Why Choose Us */}
+      <section className="py-12 px-4 bg-white relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <h2 data-aos="fade-up" className="text-3xl font-bold text-center text-gray-900 mb-10">
             Mengapa Memilih Kami?
           </h2>
 
@@ -225,7 +295,7 @@ const About = () => {
               { icon: "💰", title: "Harga Terjangkau", desc: "Hemat hingga 70% dibanding langganan resmi tanpa mengurangi kualitas layanan" },
               { icon: "⚡", title: "Proses Cepat", desc: "Akun langsung dikirim setelah pembayaran terverifikasi, tidak perlu menunggu lama" },
               { icon: "🔄", title: "Garansi Penggantian", desc: "Jika terjadi masalah dengan akun, kami siap mengganti dengan yang baru" },
-              { icon: "🎁", title: "Promo Menarik", desc: "Dapatkan diskon, cashback, dan bonus untuk pembelian dalam jumlah tertentu" },
+              { icon: "🎁", title: "Promo Menarik", desc: "Dapatkan diskon, dan bonus untuk pembelian dalam jumlah tertentu" },
             ].map((item, idx) => (
               <div
                 key={idx}
@@ -250,42 +320,49 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section - Padding dikurangi */}
-      <section className="py-12 px-4 bg-slate-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 data-aos="fade-up" className="text-3xl font-bold mb-3 text-slate-900">
-            Punya Pertanyaan?
-          </h2>
-          <p data-aos="fade-up" data-aos-delay="100" className="text-lg text-slate-600 mb-8">
-            Tim kami siap membantu Anda. Hubungi kami kapan saja!
-          </p>
+      {/* ✅ CTA – samakan style seperti halaman lain (panel merah + shimmer) */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <GradientOrbs />
+        <FloatingParticles />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white pointer-events-none" />
 
-          <div data-aos="zoom-in" data-aos-delay="200" className="flex justify-center gap-3">
-            <a
-              href="https://wa.me/+6281325505028"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#7B1E1E] to-[#9B2E2E] px-8 py-4 text-white font-bold hover:shadow-2xl hover:shadow-[#7B1E1E]/30 transition-all duration-300 hover:scale-105 overflow-hidden"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/18 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              <span className="relative">💬 Chat WhatsApp</span>
-            </a>
-          </div>
-
-          {/* Trust badges bottom */}
+        <div className="container-page relative z-10">
           <div
             data-aos="fade-up"
-            data-aos-delay="300"
-            className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-600"
+            className="relative overflow-hidden rounded-3xl bg-[#7B1E1E] text-white p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
           >
-            {["✅ Legal & terpercaya", "✅ Support responsif", "✅ Proses cepat"].map((badge, i) => (
-              <span
-                key={badge}
-                className="rounded-full bg-white px-4 py-2 border border-slate-200 shadow-sm"
-              >
-                {badge}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-40"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0) 100%)",
+              }}
+            />
+
+            <div className="text-center md:text-left relative" data-aos="fade-right" data-aos-delay="100">
+              <h3 className="text-2xl md:text-3xl font-bold">Punya pertanyaan?</h3>
+              <p className="mt-2 text-white/90">
+                Chat admin kapan saja. Kami bantu sampai jelas dan beres.
+              </p>          
+            </div>
+
+            <a
+              data-aos="zoom-in"
+              data-aos-delay="200"
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-white text-[#7B1E1E] px-6 py-3 font-semibold hover:opacity-95 transition shadow-sm"
+            >
+              <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+                <span
+                  className="shimmer absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-slate-200/70 to-transparent"
+                  style={{ animation: "shimmerX 1.2s ease-in-out infinite" }}
+                />
               </span>
-            ))}
+              <span className="relative">💬 Chat WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>
