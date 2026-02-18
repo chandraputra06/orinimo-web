@@ -166,7 +166,7 @@ const Home = () => {
             data-aos-delay="200"
             className="mt-5 max-w-2xl mx-auto text-base md:text-lg text-slate-600 leading-relaxed"
           >
-            Dapatkan akun premium seperti Netflix, Spotify, Canva, VPN dan lainnya dengan proses cepat,
+            Dapatkan akun premium seperti Netflix, Chat GPT, Canva, dan lainnya dengan proses cepat,
             aman, dan harga terbaik.
           </p>
 
