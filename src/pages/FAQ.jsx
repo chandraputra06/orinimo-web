@@ -315,7 +315,7 @@ const FAQ = () => {
             </div>
 
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Orinimo%20Store,%20saya%20ingin%20bertanya%20tentang%20produk."
+              href="https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20bertanya%20tentang%20Aplikasi%20Premium."
               target="_blank"
               rel="noopener noreferrer"
               className="group relative z-10 inline-flex items-center justify-center rounded-xl bg-white text-[#7B1E1E] px-6 py-3 font-bold hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"

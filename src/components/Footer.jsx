@@ -122,7 +122,7 @@ const Footer = () => {
             <h4 className="font-semibold">Kontak</h4>
             <ul className="mt-3 space-y-2 text-sm text-white/90">
               <li>Instagram: @orinimo.premapps</li>
-              <li>WA: +62 812-3456-7890</li>
+              <li>WA: +62 813-2550-5028</li>
               <li>Jam: 09.00 - 21.00 WIB</li>
             </ul>
           </div>

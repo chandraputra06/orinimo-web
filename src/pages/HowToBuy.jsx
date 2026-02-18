@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 const BRAND = "#7B1E1E";
 
 const WHATSAPP =
-  "https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20order%20produk%20digital.%20Tolong%20dibantu%20ya.";
+  "https://wa.me/+6281325505028?text=Halo%20Orinimo%20Store,%20saya%20ingin%20order.%20Tolong%20dibantu%20ya.";
 
 // 🔴 Background animasi yang sama dengan Home
 const GradientOrbs = () => {
